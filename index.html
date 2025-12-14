@@ -663,10 +663,75 @@
         @media (max-width: 900px) {
             .journey-container {
                 flex-direction: column-reverse;
+                gap: 40px;
+                margin-top: 40px;
             }
 
             .journey-img-wrapper {
                 height: 300px;
+            }
+
+            .step-display-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .journey-section {
+                padding: 60px 0;
+            }
+
+            .journey-img-wrapper {
+                height: 240px;
+            }
+
+            .journey-step-card {
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .step-info h3 {
+                font-size: 1.1rem;
+            }
+
+            .step-info p {
+                font-size: 0.85rem;
+            }
+
+            .step-display-title {
+                font-size: 1.5rem;
+            }
+
+            /* Horizontal Scroll for Mobile */
+            .stats-grid,
+            .services-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 20px;
+                padding-bottom: 20px;
+                margin: 0 -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .stats-grid::-webkit-scrollbar,
+            .services-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .stat-card,
+            .service-card {
+                min-width: 280px;
+                scroll-snap-align: center;
+                margin: 0;
             }
         }
 
