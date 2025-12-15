@@ -807,9 +807,33 @@
         }
 
         /* RESPONSIVE */
+        /* RESPONSIVE & DENSITY OPTIMIZATION */
         @media (max-width: 768px) {
+
+            /* Typography Scaling */
             .hero-title {
-                font-size: 3rem;
+                font-size: 2.5rem;
+                /* Reduced from 3rem */
+            }
+
+            .section h2,
+            .journey-section h2,
+            .services-section h2 {
+                font-size: 2rem;
+                /* Standardize and reduce section headers */
+            }
+
+            p,
+            .service-sub,
+            .step-info p {
+                font-size: 0.9rem;
+                /* Slightly smaller body text */
+            }
+
+            /* Layout & Spacing */
+            .section {
+                padding: 30px 0;
+                /* Tight spacing */
             }
 
             .cta-btns {
@@ -820,18 +844,141 @@
                 flex-direction: column;
             }
 
-            .search-container {
+            /* Component Density */
+            .journey-step-card {
+                padding: 15px;
+                border-radius: 16px;
+            }
+
+            /* Stats: Row Layout (Icon Left, Text Right) */
+            .stats-grid {
+                display: flex;
                 flex-direction: column;
+                gap: 15px;
+            }
+
+            .stat-card {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                text-align: left;
+                padding: 15px;
+                min-width: 0;
+                /* Prevents flex overflow */
+            }
+
+            .stat-card .icon-box {
+                margin: 0;
+                flex-shrink: 0;
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+
+            .stat-card .stat-value {
+                margin: 0;
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .stat-card .stat-label {
+                font-size: 0.9rem;
+                margin: 0;
+            }
+
+            .stat-card .stat-sub {
+                display: none;
+                /* Hide subtext for compactness if needed, or keep small */
+            }
+
+            /* Services: 2-Column Grid */
+            .services-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                overflow: visible;
+                /* Remove horizontal scroll */
+                padding: 0;
+                margin: 0;
+            }
+
+            .service-card {
+                min-width: auto;
+                scroll-snap-align: none;
+                margin: 0;
+                display: flex;
+                /* Flex to center content vertically if needed */
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .service-icon-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+
+            /* Check Availability Optimization */
+            .availability-section .pin-icon-top,
+            .availability-section h2,
+            .availability-section p {
+                display: none;
+            }
+
+            .availability-section .pincode-card {
+                padding: 15px;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                margin: 0;
+            }
+
+            .availability-section {
+                padding-bottom: 10px;
+            }
+
+            .search-container {
+                flex-direction: row;
+                gap: 8px;
+            }
+
+            .pincode-input {
+                font-size: 0.95rem;
+                padding: 12px 12px 12px 40px;
+                height: 48px;
+            }
+
+            .search-icon-input {
+                left: 12px;
+                font-size: 0.9rem;
             }
 
             .go-btn {
-                width: 100%;
-                justify-content: center;
-                padding: 15px;
+                width: auto;
+                padding: 0 20px;
+                height: 48px;
+                font-size: 1rem;
+            }
+
+            .status-box {
+                margin-top: 10px;
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+
+            /* Services Grid Gap */
+            .services-section {
+                padding-top: 10px;
+            }
+
+            .services-grid {
+                gap: 15px;
             }
 
             .contact-form-container {
-                padding: 30px 20px;
+                padding: 25px 15px;
             }
         }
 
