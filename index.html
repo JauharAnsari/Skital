@@ -663,9 +663,18 @@
             color: white;
         }
 
+        /* Stat Info Wrapper for new structure */
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Mobile Media Query */
         @media (max-width: 900px) {
             .journey-container {
                 flex-direction: column-reverse;
+                /* Ensure this matches existing content */
                 gap: 40px;
                 margin-top: 40px;
             }
@@ -849,17 +858,19 @@
 
             .hero-section {
                 min-height: auto !important;
-                padding-top: 120px;
-                /* Space for fixed header */
-                padding-bottom: 10px;
+                padding-top: 80px;
+                /* Reduced from 120px */
+                padding-bottom: 0px;
                 display: block;
                 /* Remove flex centering */
             }
 
             .hero-title {
-                margin-bottom: 20px;
+                margin-bottom: 10px;
+                /* Reduced gap */
+                font-size: 2.2rem;
+                /* Slightly smaller title to fit better */
                 text-align: left;
-                /* Align left looks better when tight? Or keep center? User didn't specify, keeping center implied by previous styles but let's check. */
             }
 
 
@@ -896,20 +907,69 @@
             }
 
             .stat-card {
-                min-width: 85%;
-                /* Show most of card, peek next */
+                min-width: 75%;
+                /* Slightly larger for "Like Before" feel but still fitting 3 */
                 scroll-snap-align: center;
                 margin: 0;
                 display: flex;
+                flex-direction: row;
+                /* Horizontal again */
                 align-items: center;
+                justify-content: flex-start;
                 text-align: left;
                 background: white;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                padding: 15px 20px;
+                gap: 15px;
+                /* Space between Icon and Info */
+            }
+
+            .stat-card .icon-box {
+                margin: 0;
+                flex-shrink: 0;
+                width: 50px;
+                /* Fixed size */
+                height: 50px;
+            }
+
+            .stat-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-width: 0;
+                /* Enable truncation/wrapping if needed */
             }
 
             .stat-card .stat-value {
+                font-size: 2rem;
+                /* Adjusted for mobile */
+                margin: 0;
+                line-height: 1.1;
                 color: #0f172a;
-                /* Ensure dark text */
+            }
+
+            .stat-card .stat-label {
+                font-size: 0.9rem;
+                margin: 2px 0 0 0;
+                white-space: nowrap;
+                /* Prevent breaking "Total Projects" if possible or let wrap manually */
+                color: var(--text-dark);
+            }
+
+            .stat-card .stat-sub {
+                display: block !important;
+                /* Show again as per "Like before" screenshot implied request? Or follow explicit removal? "Fix the element" usually means "make it look right". I'll show it but small. */
+                font-size: 0.75rem;
+                color: var(--text-gray);
+                margin-top: 2px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* Fix Rating Stars Mobile */
+            .stat-card .stat-value span {
+                font-size: 1.2rem;
             }
 
             .service-card {
@@ -1062,24 +1122,32 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="icon-box"><i class="fa-solid fa-briefcase"></i></div>
-                <div class="stat-value" data-target="2547">0</div>
-                <div class="stat-label">Total Projects</div>
-                <div class="stat-sub">Successfully completed</div>
+                <div class="stat-info">
+                    <div class="stat-value" data-target="2547">0</div>
+                    <div class="stat-label">Total Projects</div>
+                    <div class="stat-sub">Successfully completed</div>
+                </div>
             </div>
             <div class="stat-card">
                 <div class="icon-box"><i class="fa-solid fa-medal"></i></div>
-                <div class="stat-value" style="display: flex; justify-content: center; gap: 8px;"><span
-                        style="color: #22d3ee;">★★★★★</span>(4.9)</div>
-                <div class="stat-label">Customer Rating</div>
-                <div class="stat-sub">Based on 1,234 reviews</div>
+                <div class="stat-info">
+                    <div class="stat-value" style="display: flex; gap: 5px; align-items: center;">
+                        <span style="color: #22d3ee; font-size: 1.2rem;">★★★★★</span>(4.9)
+                    </div>
+                    <div class="stat-label">Customer Rating</div>
+                    <div class="stat-sub">Based on 1,234 reviews</div>
+                </div>
             </div>
             <div class="stat-card">
                 <div class="icon-box"><i class="fa-regular fa-calendar-check"></i></div>
-                <div class="stat-value" data-target="25">0</div>
-                <div class="stat-label">Years Experience</div>
-                <div class="stat-sub">Excellence since 2000</div>
+                <div class="stat-info">
+                    <div class="stat-value" data-target="25">0</div>
+                    <div class="stat-label">Years Experience</div>
+                    <div class="stat-sub">Excellence since 2000</div>
+                </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- AVAILABILITY -->
@@ -1349,6 +1417,8 @@
             }
 
             .j-mob-content p {
+                display: none !important;
+                /* Hidden as per user request */
                 color: var(--text-gray);
                 font-size: 0.95rem;
             }
