@@ -901,17 +901,19 @@
 
             /* Stats: Row Layout (Icon Left, Text Right) */
             /* Stats & Services: Single Frame for Stats, Scroll for Services */
+            /* Mobile Services: 3-Column Grid */
             .services-grid {
                 display: flex !important;
-                flex-wrap: nowrap !important;
-                overflow-x: auto !important;
-                scroll-snap-type: x mandatory;
-                gap: 15px;
-                padding-bottom: 15px;
-                -webkit-overflow-scrolling: touch;
-                margin: 0 -20px;
-                padding-left: 20px;
-                padding-right: 20px;
+                flex-wrap: wrap !important;
+                overflow-x: visible !important;
+                scroll-snap-type: none;
+                gap: 5px;
+                /* Tight gap */
+                padding-bottom: 0px;
+                margin: 0;
+                padding-left: 5px;
+                padding-right: 5px;
+                justify-content: center;
             }
 
             .stats-grid {
@@ -990,15 +992,40 @@
             }
 
             .service-card {
-                min-width: 140px;
-                /* Smaller cards for services */
-                scroll-snap-align: start;
+                min-width: 0 !important;
+                width: 30% !important;
+                /* Force 3 columns */
+                flex: 0 0 30% !important;
+                box-sizing: border-box;
+                scroll-snap-align: none;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                padding: 20px 10px;
+                padding: 5px 2px;
                 background: white;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                margin-bottom: 5px;
+                border-radius: 6px;
+            }
+
+            .service-card h3 {
+                font-size: 0.7rem !important;
+                /* Tiny text */
+                margin-top: 5px;
+            }
+
+            /* Show only 6 items on mobile */
+            .service-card:nth-child(n+7) {
+                display: none !important;
+            }
+
+            .service-card p {
+                display: none;
+                /* Hide description text if any, to save space, assuming only icon/title needed for small grid? User said text too. */
+                /* Actually user said "reduce size of Box and icon and text". */
+                font-size: 0.6rem !important;
+                line-height: 1;
+                margin-top: 2px;
             }
 
             /* Tighten Layout for "One Frame" Feel */
@@ -1021,10 +1048,16 @@
             }
 
             .service-icon-circle {
-                width: 50px;
-                height: 50px;
-                font-size: 1.4rem;
-                margin-bottom: 15px;
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f1f5f9;
+                border-radius: 50%;
+                color: var(--primary-color);
             }
 
             /* Check Availability Optimization */
