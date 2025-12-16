@@ -127,8 +127,8 @@
         /* HEADER */
         header {
             padding: 20px 0;
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(20px);
+            background: transparent;
+            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -830,6 +830,15 @@
                 /* Reduced from 3rem */
             }
 
+            .brand-name {
+                font-size: 1.5rem;
+            }
+
+            .nav-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+
             .section h2,
             .journey-section h2,
             .services-section h2 {
@@ -858,7 +867,7 @@
 
             .hero-section {
                 min-height: auto !important;
-                padding-top: 80px;
+                padding-top: 10px;
                 /* Reduced from 120px */
                 padding-bottom: 0px;
                 display: block;
@@ -868,9 +877,15 @@
             .hero-title {
                 margin-bottom: 10px;
                 /* Reduced gap */
-                font-size: 2.2rem;
+                /* Reduced gap */
+                font-size: 1.5rem;
+                white-space: nowrap;
                 /* Slightly smaller title to fit better */
                 text-align: left;
+            }
+
+            .hero-title br {
+                display: none;
             }
 
 
@@ -885,8 +900,7 @@
             }
 
             /* Stats: Row Layout (Icon Left, Text Right) */
-            /* Mobile Scrollable Sections ("One Frame" Layout) */
-            .stats-grid,
+            /* Stats & Services: Single Frame for Stats, Scroll for Services */
             .services-grid {
                 display: flex !important;
                 flex-wrap: nowrap !important;
@@ -896,40 +910,67 @@
                 padding-bottom: 15px;
                 -webkit-overflow-scrolling: touch;
                 margin: 0 -20px;
-                /* Bleed to edges */
                 padding-left: 20px;
                 padding-right: 20px;
             }
 
-            .stats-grid::-webkit-scrollbar,
+            .stats-grid {
+                display: flex !important;
+                gap: 10px;
+                margin: 0;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .stats-grid::-webkit-scrollbar {
+                display: none;
+            }
+
             .services-grid::-webkit-scrollbar {
                 display: none;
             }
 
             .stat-card {
-                min-width: 75%;
-                /* Slightly larger for "Like Before" feel but still fitting 3 */
-                scroll-snap-align: center;
+                flex: 1;
+                min-width: 0;
+                /* Allow shrinking */
+                scroll-snap-align: none;
                 margin: 0;
                 display: flex;
-                flex-direction: row;
-                /* Horizontal again */
+                flex-direction: column;
+                /* Stack Vertical */
                 align-items: center;
-                justify-content: flex-start;
-                text-align: left;
+                justify-content: center;
+                text-align: center;
                 background: white;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-                padding: 15px 20px;
-                gap: 15px;
-                /* Space between Icon and Info */
+                padding: 10px 5px;
+                /* Minimal padding */
+                gap: 2px;
+                border-radius: 12px;
+            }
+
+            .stat-card .stat-value {
+                font-size: 1.2rem;
+                margin: 0;
+                color: #0f172a;
+                width: 100%;
+                justify-content: center !important;
+            }
+
+            .stat-card .stat-label {
+                font-size: 0.7rem;
+                line-height: 1.1;
+                white-space: normal;
+                /* Allow wrapping */
+            }
+
+            .stat-card .stat-sub {
+                display: none !important;
             }
 
             .stat-card .icon-box {
-                margin: 0;
-                flex-shrink: 0;
-                width: 50px;
-                /* Fixed size */
-                height: 50px;
+                display: none !important;
             }
 
             .stat-info {
@@ -940,36 +981,12 @@
                 /* Enable truncation/wrapping if needed */
             }
 
-            .stat-card .stat-value {
-                font-size: 2rem;
-                /* Adjusted for mobile */
-                margin: 0;
-                line-height: 1.1;
-                color: #0f172a;
-            }
 
-            .stat-card .stat-label {
-                font-size: 0.9rem;
-                margin: 2px 0 0 0;
-                white-space: nowrap;
-                /* Prevent breaking "Total Projects" if possible or let wrap manually */
-                color: var(--text-dark);
-            }
-
-            .stat-card .stat-sub {
-                display: block !important;
-                /* Show again as per "Like before" screenshot implied request? Or follow explicit removal? "Fix the element" usually means "make it look right". I'll show it but small. */
-                font-size: 0.75rem;
-                color: var(--text-gray);
-                margin-top: 2px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
 
             /* Fix Rating Stars Mobile */
+            /* Fix Rating Stars Mobile */
             .stat-card .stat-value span {
-                font-size: 1.2rem;
+                display: none !important;
             }
 
             .service-card {
@@ -989,12 +1006,18 @@
                 padding: 10px 0 !important;
             }
 
+            .stats-section {
+                padding-bottom: 0 !important;
+                margin-bottom: 0 !important;
+            }
+
             .hero-section {
                 padding-bottom: 0 !important;
             }
 
             .availability-section {
-                margin-top: 10px;
+                margin-top: 0px;
+                padding-top: 0;
             }
 
             .service-icon-circle {
@@ -1020,36 +1043,162 @@
             }
 
             .availability-section {
-                padding-bottom: 10px;
+                padding-bottom: 0px;
+                margin-bottom: 0px !important;
+            }
+
+            /* Services/Expertise Refinements */
+            .service-sub {
+                display: none !important;
+            }
+
+            .section h2,
+            .journey-section h2,
+            .services-section h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 5px !important;
+            }
+
+            .services-section {
+                padding-top: 5px !important;
+                margin-top: 0 !important;
             }
 
             .search-container {
                 flex-direction: row;
-                gap: 8px;
+                gap: 5px;
+                position: relative;
+                max-width: 100%;
+                background: white;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 12px;
+                padding: 4px;
+            }
+
+            .input-wrapper {
+                width: auto;
+            }
+
+            /* Hide left search icon since button is on right */
+            .search-icon-input {
+                display: none;
             }
 
             .pincode-input {
+                padding: 10px 15px;
                 font-size: 0.95rem;
-                padding: 12px 12px 12px 40px;
-                height: 48px;
+                height: 44px;
+                border: none;
+                box-shadow: none;
             }
 
-            .search-icon-input {
-                left: 12px;
-                font-size: 0.9rem;
+            .pincode-input:focus {
+                box-shadow: none;
+            }
+
+            /* Hide Static Contact Section on Mobile */
+            .contact-section-new {
+                display: none;
+            }
+
+            /* Modal Styles */
+            .contact-modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(5px);
+                z-index: 2000;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .contact-modal.active {
+                display: flex;
+                opacity: 1;
+            }
+
+            .contact-modal .contact-form-container {
+                width: 100%;
+                max-width: 500px;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+                margin: 0;
+                animation: slideUp 0.3s ease;
+            }
+
+            @keyframes slideUp {
+                from {
+                    transform: translateY(50px);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            .close-modal-btn {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--text-dark);
+                cursor: pointer;
+                z-index: 10;
             }
 
             .go-btn {
-                width: auto;
-                padding: 0 20px;
-                height: 48px;
-                font-size: 1rem;
+                width: 44px;
+                height: 44px;
+                padding: 0;
+                min-width: 44px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                background: #34d399;
+                /* Green like uploaded image */
+            }
+
+            /* Hide Text "Check" in button, keep icon */
+            .go-btn {
+                font-size: 0;
+                /* Hide text */
+            }
+
+            .go-btn i {
+                font-size: 1.1rem;
+                color: white;
+            }
+
+            /* Change arrow to magnifying glass search icon if needed, but user said 'search button' look like this. 
+               The HTML has arrow-right. I should probably switch the icon content via CSS or assume the arrow is fine?
+               The image shows a magnifying glass. I'll switch the class in HTML or use content replacement. 
+               Actually safely, I'll just Replace the Icon class in HTML or accept arrow. 
+               The user said 'Make Search Button look like this', the image has a Search Glass.
+               I will change the icon in the button via CSS content rewrite or just trust the user accepts the shape first. 
+               Let's try to swap the icon via CSS hack or JS? No, I can replace the HTML too.
+               Let's stick to CSS shape first. I'll make the icon visible. */
+
+            .go-btn i::before {
+                content: "\f002";
+                /* FontAwesome Search Icon code */
             }
 
             .status-box {
-                margin-top: 10px;
-                padding: 12px;
-                font-size: 0.85rem;
+                display: none !important;
             }
 
             /* Services Grid Gap */
@@ -1099,7 +1248,7 @@
     <header>
         <div class="container header-content">
             <div class="brand-name">Skital</div>
-            <a href="#contact" class="nav-btn">Contact</a>
+            <a href="#contact" class="nav-btn" onclick="handleContactClick(event)">Contact</a>
         </div>
     </header>
 
@@ -1540,9 +1689,30 @@
                 }
             });
         }
+
+        // Modal Logic
+        function handleContactClick(e) {
+            // Check if mobile (using same breakpoint as CSS 900px, roughly)
+            if (window.innerWidth <= 900) {
+                e.preventDefault();
+                document.getElementById('mobileContactModal').classList.add('active');
+            }
+            // else let it scroll
+        }
+
+        function closeModal() {
+            document.getElementById('mobileContactModal').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('mobileContactModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
     </script>
 
-    <!-- CONTACT -->
+    <!-- CONTACT (Desktop Only via CSS hide) -->
     <div id="contact" class="contact-section-new section">
         <div class="container contact-form-container">
             <div class="form-header">
@@ -1560,6 +1730,45 @@
             <form id="contactForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
                 onsubmit="handleFormSubmit(event)">
                 <input type="hidden" name="_subject" value="New Inquiry from Skital Website">
+                <input type="hidden" name="_captcha" value="false">
+
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <i class="fa-regular fa-user input-icon"></i>
+                    <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <i class="fa-regular fa-envelope input-icon"></i>
+                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <i class="fa-regular fa-comment-dots input-icon"></i>
+                    <textarea name="message" class="form-control" placeholder="Tell us about your needs..."
+                        style="height: 150px; resize: vertical;" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message <i class="fa-regular fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Contact Modal -->
+    <div id="mobileContactModal" class="contact-modal">
+        <div class="container contact-form-container">
+            <button class="close-modal-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="form-header">
+                <h2>Get In Touch</h2>
+                <p>Ready to start your project? Let's talk.</p>
+            </div>
+
+            <!-- Duplicated form for specific mobile modal logic, or reused logic could be applied. 
+                 Using simple duplication for reliability in single file. -->
+            <form action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Mobile Inquiry">
                 <input type="hidden" name="_captcha" value="false">
 
                 <div class="form-group">
