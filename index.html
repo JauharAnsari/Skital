@@ -876,7 +876,29 @@
 
             .hero-title {
                 margin-bottom: 10px;
-                /* Reduced gap */
+            }
+
+            /* Header Box Style for Mobile */
+            header {
+                background: rgba(255, 255, 255, 0.1) !important;
+                /* Glass effect */
+                backdrop-filter: blur(10px) !important;
+                margin: 10px 15px;
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                /* Just the border */
+                padding: 10px 20px;
+                box-shadow: none !important;
+                top: 10px;
+            }
+
+            /* Reduced gap */
+            .hero-section {
+                padding-top: 10px;
+                /* Since header is floating, we might need to check spacing. */
+            }
+
+            .hero-title {
                 /* Reduced gap */
                 font-size: 1.5rem;
                 white-space: nowrap;
@@ -1197,23 +1219,33 @@
                 padding: 0;
                 min-width: 44px;
                 border-radius: 8px;
-                display: flex;
+                display: flex !important;
                 align-items: center;
                 justify-content: center;
-                font-size: 1.2rem;
+                font-size: 0 !important;
+                /* Hide text */
                 background: #34d399;
                 /* Green like uploaded image */
+                line-height: normal;
+                /* Reset line height */
             }
 
             /* Hide Text "Check" in button, keep icon */
-            .go-btn {
-                font-size: 0;
-                /* Hide text */
-            }
+            /* Consolidated above */
 
             .go-btn i {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
+                /* Slightly larger icon */
                 color: white;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: auto;
+                height: auto;
+                display: inline-block;
+                line-height: normal;
+                /* Reset */
+                transform: translateY(0);
+                /* Reset any transform */
             }
 
             /* Change arrow to magnifying glass search icon if needed, but user said 'search button' look like this. 
@@ -1579,6 +1611,20 @@
             .j-mob-img {
                 height: 250px;
                 width: 100%;
+            }
+
+            /* Project Journey Refinements */
+            .journey-section h2 {
+                text-align: center !important;
+            }
+
+            .journey-section p {
+                display: none !important;
+            }
+
+            .journey-step {
+                width: 100%;
+                margin-left: 0;
             }
 
             .j-mob-img img {
