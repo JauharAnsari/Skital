@@ -836,9 +836,27 @@
                 /* Tight spacing */
             }
 
+            /* Hide Hero Elements on Mobile */
+            .hero-subtitle,
             .cta-btns {
-                flex-direction: column;
+                display: none !important;
             }
+
+            .hero-section {
+                min-height: auto !important;
+                padding-top: 120px;
+                /* Space for fixed header */
+                padding-bottom: 10px;
+                display: block;
+                /* Remove flex centering */
+            }
+
+            .hero-title {
+                margin-bottom: 20px;
+                text-align: left;
+                /* Align left looks better when tight? Or keep center? User didn't specify, keeping center implied by previous styles but let's check. */
+            }
+
 
             .timeline-container {
                 flex-direction: column;
@@ -1122,11 +1140,12 @@
     <!-- JOURNEY -->
     <div class="journey-section">
         <div class="container section">
-            <h2 style="text-align: left; margin-bottom: 5px;">Project Journey</h2>
-            <p style="text-align: left; color: var(--text-gray); margin-bottom: 0;">A clear step-by-step flow from the
-                first visit to final handover.</p>
+            <h2 style="text-align: left; margin-bottom: 5px;">Project Journey Showcase</h2>
+            <p style="text-align: left; color: var(--text-gray); margin-bottom: 30px;">Witness the transformation from
+                concept to completion</p>
 
-            <div class="journey-container">
+            <!-- DESKTOP VIEW (Hidden on Mobile) -->
+            <div class="journey-container desktop-only">
                 <!-- Left Column: Steps Navigation -->
                 <div class="journey-steps-col">
                     <!-- Step 1 -->
@@ -1187,8 +1206,265 @@
                     </div>
                 </div>
             </div>
+
+            <!-- MOBILE VIEW (Hidden on Desktop) -->
+            <div class="journey-mobile-view mobile-only">
+                <div class="journey-carousel" id="journeyMobileCarousel">
+                    <!-- Step 1 -->
+                    <div class="journey-mobile-card" id="mob-step-1">
+                        <div class="j-mob-img">
+                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
+                                alt="Step 1">
+                        </div>
+                        <div class="j-mob-content">
+                            <h3>Discovery & Site Visit</h3>
+                            <p>We understand your vision, constraints and walk through the space together.</p>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="journey-mobile-card" id="mob-step-2">
+                        <div class="j-mob-img">
+                            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"
+                                alt="Step 2">
+                        </div>
+                        <div class="j-mob-content">
+                            <h3>Design & Planning</h3>
+                            <p>Concepts, layouts and material recommendations tailored to your budget.</p>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="journey-mobile-card" id="mob-step-3">
+                        <div class="j-mob-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80"
+                                alt="Step 3">
+                        </div>
+                        <div class="j-mob-content">
+                            <h3>Execution</h3>
+                            <p>Our vetted professionals execute the plan with regular updates and check-ins.</p>
+                        </div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="journey-mobile-card" id="mob-step-4">
+                        <div class="j-mob-img">
+                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
+                                alt="Step 4">
+                        </div>
+                        <div class="j-mob-content">
+                            <h3>Handover & Aftercare</h3>
+                            <p>Walkthrough, quality checks and support even after the project is done.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Mobile Controls -->
+                <div class="journey-mobile-controls">
+                    <button class="j-mob-btn active" onclick="scrollToMobileStep(1)" id="btn-step-1">Step 1</button>
+                    <button class="j-mob-btn" onclick="scrollToMobileStep(2)" id="btn-step-2">Step 2</button>
+                    <button class="j-mob-btn" onclick="scrollToMobileStep(3)" id="btn-step-3">Step 3</button>
+                    <button class="j-mob-btn" onclick="scrollToMobileStep(4)" id="btn-step-4">Final</button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <style>
+        /* Separating Desktop and Mobile Views */
+        .mobile-only {
+            display: none;
+        }
+
+        .desktop-only {
+            display: flex;
+        }
+
+        @media (max-width: 900px) {
+            .mobile-only {
+                display: block;
+            }
+
+            .desktop-only {
+                display: none;
+            }
+
+            /* Mobile Carousel Styles */
+            .journey-mobile-view {
+                position: relative;
+            }
+
+            .journey-carousel {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 20px;
+                padding-bottom: 20px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                /* Firefox */
+            }
+
+            .journey-carousel::-webkit-scrollbar {
+                display: none;
+            }
+
+            .journey-mobile-card {
+                min-width: 100%;
+                /* Full width for single focus */
+                scroll-snap-align: center;
+                background: var(--surface-color);
+                backdrop-filter: blur(15px);
+                border-radius: 20px;
+                overflow: hidden;
+                border: var(--glass-border);
+                box-shadow: var(--shadow-md);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .j-mob-img {
+                height: 250px;
+                width: 100%;
+            }
+
+            .j-mob-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .j-mob-content {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .j-mob-content h3 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+                color: var(--text-dark);
+            }
+
+            .j-mob-content p {
+                color: var(--text-gray);
+                font-size: 0.95rem;
+            }
+
+            /* Mobile Controls */
+            .journey-mobile-controls {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .j-mob-btn {
+                background: white;
+                border: 1px solid #e2e8f0;
+                color: #64748b;
+                padding: 10px 18px;
+                border-radius: 12px;
+                font-weight: 600;
+                font-size: 0.9rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .j-mob-btn.active {
+                background: #f97316;
+                /* Orange */
+                color: white;
+                border-color: #f97316;
+                box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+            }
+        }
+    </style>
+
+    <script>
+        // Mobile Carousel Logic
+        let currentMobStep = 1;
+        let autoScrollInterval;
+
+        function scrollToMobileStep(stepId) {
+            const carousel = document.getElementById('journeyMobileCarousel');
+            const targetCard = document.getElementById(`mob-step-${stepId}`);
+            if (!carousel || !targetCard) return;
+
+            // Update Scroll
+            carousel.scrollTo({
+                left: targetCard.offsetLeft - carousel.offsetLeft,
+                behavior: 'smooth'
+            });
+
+            // Update Buttons
+            document.querySelectorAll('.j-mob-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-step-${stepId}`).classList.add('active');
+
+            currentMobStep = stepId;
+
+            // Reset Auto Scroll Timer on manual interaction
+            resetAutoScroll();
+        }
+
+        function nextMobileStep() {
+            let next = currentMobStep + 1;
+            if (next > 4) next = 1;
+            scrollToMobileStep(next);
+        }
+
+        function startAutoScroll() {
+            if (autoScrollInterval) return;
+            autoScrollInterval = setInterval(nextMobileStep, 3500); // 3.5 seconds
+        }
+
+        function stopAutoScroll() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
+
+        function resetAutoScroll() {
+            stopAutoScroll();
+            startAutoScroll();
+        }
+
+        // Initialize Auto Scroll only when visible on mobile
+        if (window.innerWidth <= 900) {
+            const carousel = document.getElementById('journeyMobileCarousel');
+
+            // Intersection Observer
+            const carouselObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startAutoScroll();
+                    } else {
+                        stopAutoScroll();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            if (carousel) {
+                carouselObserver.observe(carousel);
+                carousel.addEventListener('touchstart', stopAutoScroll);
+                carousel.addEventListener('touchend', startAutoScroll);
+            }
+        }
+
+        // Listen for Scroll to update active button (if user swipes)
+        const carousel = document.getElementById('journeyMobileCarousel');
+        if (carousel) {
+            carousel.addEventListener('scroll', () => {
+                const scrollLeft = carousel.scrollLeft;
+                const width = carousel.offsetWidth;
+                const index = Math.round(scrollLeft / width) + 1;
+
+                if (index !== currentMobStep && index >= 1 && index <= 4) {
+                    document.querySelectorAll('.j-mob-btn').forEach(btn => btn.classList.remove('active'));
+                    const btn = document.getElementById(`btn-step-${index}`);
+                    if (btn) btn.classList.add('active');
+                    currentMobStep = index;
+                }
+            });
+        }
+    </script>
 
     <!-- CONTACT -->
     <div id="contact" class="contact-section-new section">
