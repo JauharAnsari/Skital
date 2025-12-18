@@ -894,16 +894,16 @@
 
             /* Reduced gap */
             .hero-section {
-                padding-top: 60px !important;
+                padding-top: 50px !important;
                 /* Even tighter */
-                min-height: 180px !important;
+                min-height: 140px !important;
                 /* Much smaller height for mobile */
                 height: auto !important;
             }
 
             .hero-title {
                 /* Reduced gap */
-                font-size: 1.8rem;
+                font-size: 1.5rem;
                 /* Smaller title for mobile */
                 white-space: nowrap;
                 /* Slightly smaller title to fit better */
@@ -1038,6 +1038,19 @@
             .service-card .img-wrapper {
                 height: 200px !important;
                 /* Proportional image height */
+            }
+
+            /* Fix inner padding of the text container on mobile */
+            .service-card>div:last-child {
+                padding: 15px !important;
+                /* Reduce from 25px */
+                padding-top: 10px !important;
+                padding-bottom: 5px !important;
+            }
+
+            .service-card .service-text {
+                margin-bottom: 0 !important;
+                /* Remove bottom margin of text */
             }
 
             .service-card h3 {
