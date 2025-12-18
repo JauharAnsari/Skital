@@ -723,6 +723,10 @@
             /* Horizontal Scroll for Mobile */
             .stats-grid,
             .services-grid {
+                /* Remove flex/scroll from general mobile query as we are overriding in specific block, but for safety kept or removed. 
+                  Actually the block at 932 overrides this. But let's clean up if possible.
+                  For now, I will leave this as is to avoid conflicts with other pages if they share CSS, 
+                  but strictly for Carpenter page, the detailed query below handles it. */
                 display: flex;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
@@ -928,18 +932,15 @@
 
             /* Stats: Row Layout (Icon Left, Text Right) */
             /* Stats & Services: Single Frame for Stats, Scroll for Services */
-            /* Mobile Services: 3-Column Grid */
+            /* Mobile Services: 2-Column Grid */
             .services-grid {
-                display: flex !important;
-                flex-wrap: wrap !important;
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px !important;
                 overflow-x: visible !important;
                 scroll-snap-type: none;
-                gap: 5px;
-                /* Tight gap */
-                padding-bottom: 0px;
-                margin: 0;
-                padding-left: 5px;
-                padding-right: 5px;
+                margin: 0 !important;
+                padding: 0 10px !important;
                 justify-content: center;
             }
 
@@ -1021,44 +1022,46 @@
             .service-card {
                 min-width: 0 !important;
                 width: 100% !important;
-                /* Full width on mobile */
-                flex: 0 0 100% !important;
+                flex: none !important;
                 box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
-                margin-bottom: 20px;
-                /* Override inline height */
+                margin-bottom: 0px;
                 min-height: 0 !important;
-                /* Fix for large white space */
                 height: auto !important;
                 padding-bottom: 10px !important;
-                /* Reduce whitespace below text */
+                border-radius: 20px;
+                box-shadow: none;
+                background: transparent;
             }
 
             .service-card .img-wrapper {
-                height: 200px !important;
-                /* Proportional image height */
+                height: 140px !important;
+                border-radius: 16px;
+                margin-bottom: 10px;
             }
 
             /* Fix inner padding of the text container on mobile */
             .service-card>div:last-child {
-                padding: 15px !important;
-                /* Reduce from 25px */
-                padding-top: 10px !important;
-                padding-bottom: 5px !important;
+                padding: 0 !important;
+                text-align: center;
             }
 
             .service-card .service-text {
                 margin-bottom: 0 !important;
-                /* Remove bottom margin of text */
+                font-size: 1rem !important;
+                font-weight: 700;
+                color: var(--text-dark);
             }
 
             .service-card h3 {
-                font-size: 1.2rem !important;
-                /* Smaller card title */
-                margin-top: 10px;
-                margin-bottom: 5px !important;
-                /* Tighten below text */
+                font-size: 1rem !important;
+                margin-top: 5px;
+                margin-bottom: 0 !important;
+            }
+
+            .desktop-only-text {
+                display: none !important;
             }
 
             /* Show all items */
@@ -1481,7 +1484,8 @@
                     </div>
                 </div>
                 <div style="padding: 25px;">
-                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 5px;">Repair & Maintenance</div>
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 5px;">Repair <span
+                            class="desktop-only-text">& Maintenance</span></div>
                     <p style="color: var(--text-gray); font-size: 1rem;">Fixing broken doors, windows, or furniture.</p>
                 </div>
             </div>
