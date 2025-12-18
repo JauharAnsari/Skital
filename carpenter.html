@@ -1302,6 +1302,50 @@
         .whatsapp-float:hover {
             transform: scale(1.1);
         }
+
+        /* HOVER OVERLAY STYLES */
+        .service-card .img-wrapper {
+            position: relative;
+            height: 250px;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .service-card .hover-details {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .service-card:hover .hover-details {
+            transform: translateY(0);
+        }
+
+        .detail-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fbbf24;
+            /* Gold/Amber */
+            margin-bottom: 5px;
+        }
+
+        .detail-feat {
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            line-height: 1.4;
+        }
     </style>
 </head>
 
@@ -1310,569 +1354,117 @@
     <div class="ambient-blob ambient-1"></div>
     <div class="ambient-blob ambient-2"></div>
 
-    <header>
-        <div class="container header-content">
-            <div class="brand-name">Skital</div>
-            <a href="#contact" class="nav-btn" onclick="handleContactClick(event)">Contact</a>
-        </div>
-    </header>
-
-    <!-- HERO SECTION (Restored & Dark Mode) -->
-    <section class="hero-section">
+    <!-- CARPENTER HERO -->
+    <section class="hero-section"
+        style="min-height: 50vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://img.freepik.com/premium-photo/handyman-overalls-holds-piece-wood-while-working-project-i_1232903-21780.jpg'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px;">
         <div class="hero-content">
-            <h1 class="hero-title">Building Your Vision<br>With Precision.</h1>
-            <p class="hero-subtitle">Premium construction, interior design, and renovation services tailored for modern
-                living spaces.</p>
-            <div class="cta-btns">
-                <a href="#availability" class="primary-btn">Check Availability <i
-                        class="fa-solid fa-location-dot"></i></a>
-                <a href="#services" class="secondary-btn">View Services</a>
-            </div>
+            <h1 class="hero-title"
+                style="color: white; -webkit-text-fill-color: white; font-size: 5rem; margin-bottom: 10px;">Carpenter
+            </h1>
+            <p
+                style="color: rgba(255,255,255,0.95); font-size: 1.2rem; max-width: 600px; margin: 0 auto; font-weight: 500;">
+                Expert
+                Woodworking & Custom Furniture</p>
         </div>
     </section>
 
-    <!-- STATS -->
-    <div class="container section stats-section" style="animation-delay: 0.1s;">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="icon-box"><i class="fa-solid fa-briefcase"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value" data-target="2547">0</div>
-                    <div class="stat-label">Total Projects</div>
-                    <div class="stat-sub">Successfully completed</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="icon-box"><i class="fa-solid fa-medal"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value" style="display: flex; gap: 5px; align-items: center;">
-                        <span style="color: #22d3ee; font-size: 1.2rem;">★★★★★</span>(4.9)
-                    </div>
-                    <div class="stat-label">Customer Rating</div>
-                    <div class="stat-sub">Based on 1,234 reviews</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="icon-box"><i class="fa-regular fa-calendar-check"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value" data-target="25">0</div>
-                    <div class="stat-label">Years Experience</div>
-                    <div class="stat-sub">Excellence since 2000</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- AVAILABILITY -->
-    <div id="availability" class="container section availability-section" style="animation-delay: 0.2s;">
-        <div class="pincode-card">
-            <div class="pin-icon-top"><i class="fa-solid fa-location-dot"></i></div>
-            <h2>Check Availability</h2>
-            <p style="color: var(--text-gray); margin-bottom: 30px;">Enter your pincode to see if we serve your area
-                (Delhi Only)</p>
-            <div class="search-container">
-                <div class="input-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon-input"></i>
-                    <input type="text" id="pincodeInput" class="pincode-input" placeholder="Enter 6-digit pincode"
-                        maxlength="6" oninput="updateStatusBox(this.value)">
-                </div>
-                <button class="go-btn" onclick="checkPincode()">Check <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-            <div id="statusBox" class="status-box status-ready">
-                <i class="fa-solid fa-magnifying-glass"></i> Ready to search!
-            </div>
-        </div>
-    </div>
-
-    <!-- SERVICES -->
-    <div id="services" class="container section services-section" style="animation-delay: 0.3s;">
-        <h2>Our Expertise</h2>
-        <p class="service-sub">Comprehensive solutions for every need</p>
-        <div class="services-grid">
-            <div class="service-card" onclick="location.href='carpenter.html'">
-                <div class="service-icon-circle"><i class="fa-solid fa-hammer"></i></div>
-                <div class="service-text">Carpenter</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon-circle"><i class="fa-solid fa-faucet-drip"></i></div>
-                <div class="service-text">Plumber</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon-circle"><i class="fa-solid fa-scissors"></i></div>
-                <div class="service-text">Fabricator</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon-circle"><i class="fa-solid fa-helmet-safety"></i></div>
-                <div class="service-text">Civil Work</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon-circle"><i class="fa-solid fa-layer-group"></i></div>
-                <div class="service-text">Flooring</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon-circle"><i class="fa-solid fa-tree"></i></div>
-                <div class="service-text">Terrace</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon-circle"><i class="fa-solid fa-couch"></i></div>
-                <div class="service-text">Interior</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon-circle"><i class="fa-solid fa-ellipsis"></i></div>
-                <div class="service-text">More</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JOURNEY -->
-    <div class="journey-section">
-        <div class="container section">
-            <h2 style="text-align: left; margin-bottom: 5px;">Project Journey Showcase</h2>
-            <p style="text-align: left; color: var(--text-gray); margin-bottom: 30px;">Witness the transformation from
-                concept to completion</p>
-
-            <!-- DESKTOP VIEW (Hidden on Mobile) -->
-            <div class="journey-container desktop-only">
-                <!-- Left Column: Steps Navigation -->
-                <div class="journey-steps-col">
-                    <!-- Step 1 -->
-                    <div class="journey-step-card active" onclick="setJourneyStep(1)">
-                        <div class="step-number">1</div>
-                        <div class="step-info">
-                            <h3>Discovery & Site Visit</h3>
-                            <p>We understand your vision, constraints and walk through the space together.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="journey-step-card" onclick="setJourneyStep(2)">
-                        <div class="step-number">2</div>
-                        <div class="step-info">
-                            <h3>Design & Planning</h3>
-                            <p>Concepts, layouts and material recommendations tailored to your budget.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="journey-step-card" onclick="setJourneyStep(3)">
-                        <div class="step-number">3</div>
-                        <div class="step-info">
-                            <h3>Execution</h3>
-                            <p>Our vetted professionals execute the plan with regular updates and check-ins.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="journey-step-card" onclick="setJourneyStep(4)">
-                        <div class="step-number">4</div>
-                        <div class="step-info">
-                            <h3>Handover & Aftercare</h3>
-                            <p>Walkthrough, quality checks and support even after the project is done.</p>
+    <!-- CARPENTER SERVICES -->
+    <div class="container section services-section" style="animation-delay: 0.2s; padding-top: 60px;">
+        <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <!-- Wardrobe -->
+            <div class="service-card" onclick="window.location.href='#'"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.hH6QVfS4xnUuAQGNTri03QHaE8?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="Wardrobe">
+                    <div class="hover-details">
+                        <div class="detail-price">Starts @ ₹950/sq.ft</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> 10-Year Warranty<br>
+                            <i class="fa-solid fa-check"></i> Custom Internal Layouts
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Column: Visual Display -->
-                <div class="journey-image-col">
-                    <div class="journey-img-wrapper">
-                        <img id="journeyImg"
-                            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
-                            alt="Journey Step">
-                    </div>
-
-                    <div class="step-details-overlay">
-                        <span id="journeyStepBadge" class="step-badge">STEP 1</span>
-                        <h3 id="journeyTitle" class="step-display-title">Discovery & Site Visit</h3>
-                        <p id="journeyDesc" class="step-display-desc">We understand your vision, constraints and walk
-                            through the space together.</p>
-                        <div id="journeyTags" class="step-tags">
-                            <span class="step-tag">Progress photos</span>
-                            <span class="step-tag">Quality checks</span>
-                            <span class="step-tag">Project manager</span>
-                        </div>
-                    </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Wardrobe</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Custom designed wardrobes to maximize your
+                        storage space with style.</p>
                 </div>
             </div>
 
-            <!-- MOBILE VIEW (Hidden on Desktop) -->
-            <div class="journey-mobile-view mobile-only">
-                <div class="journey-carousel" id="journeyMobileCarousel">
-                    <!-- Step 1 -->
-                    <div class="journey-mobile-card" id="mob-step-1">
-                        <div class="j-mob-img">
-                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
-                                alt="Step 1">
-                        </div>
-                        <div class="j-mob-content">
-                            <h3>Discovery & Site Visit</h3>
-                            <p>We understand your vision, constraints and walk through the space together.</p>
-                        </div>
-                    </div>
-                    <!-- Step 2 -->
-                    <div class="journey-mobile-card" id="mob-step-2">
-                        <div class="j-mob-img">
-                            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"
-                                alt="Step 2">
-                        </div>
-                        <div class="j-mob-content">
-                            <h3>Design & Planning</h3>
-                            <p>Concepts, layouts and material recommendations tailored to your budget.</p>
-                        </div>
-                    </div>
-                    <!-- Step 3 -->
-                    <div class="journey-mobile-card" id="mob-step-3">
-                        <div class="j-mob-img">
-                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80"
-                                alt="Step 3">
-                        </div>
-                        <div class="j-mob-content">
-                            <h3>Execution</h3>
-                            <p>Our vetted professionals execute the plan with regular updates and check-ins.</p>
-                        </div>
-                    </div>
-                    <!-- Step 4 -->
-                    <div class="journey-mobile-card" id="mob-step-4">
-                        <div class="j-mob-img">
-                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
-                                alt="Step 4">
-                        </div>
-                        <div class="j-mob-content">
-                            <h3>Handover & Aftercare</h3>
-                            <p>Walkthrough, quality checks and support even after the project is done.</p>
+            <!-- Kitchen -->
+            <div class="service-card" onclick="window.location.href='#'"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="Kitchen">
+                    <div class="hover-details">
+                        <div class="detail-price">Starts @ ₹1,400/sq.ft</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> Waterproof Marine Ply<br>
+                            <i class="fa-solid fa-check"></i> Soft-Close Hettich Hinges
                         </div>
                     </div>
                 </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Kitchen</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Modern modular kitchens tailored to your
+                        cooking needs.</p>
+                </div>
+            </div>
 
-                <!-- Custom Mobile Controls -->
-                <div class="journey-mobile-controls">
-                    <button class="j-mob-btn active" onclick="scrollToMobileStep(1)" id="btn-step-1">Step 1</button>
-                    <button class="j-mob-btn" onclick="scrollToMobileStep(2)" id="btn-step-2">Step 2</button>
-                    <button class="j-mob-btn" onclick="scrollToMobileStep(3)" id="btn-step-3">Step 3</button>
-                    <button class="j-mob-btn" onclick="scrollToMobileStep(4)" id="btn-step-4">Final</button>
+            <!-- Door -->
+            <div class="service-card" onclick="window.location.href='#'"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.1JYv3NcEgR2bgagIe0F2ewHaLH?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="Door">
+                    <div class="hover-details">
+                        <div class="detail-price">Starts @ ₹8,500/unit</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> Solid Teak Wood<br>
+                            <i class="fa-solid fa-check"></i> Weather-Proof Polish
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Door</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Solid wood and designer doors for security and
+                        aesthetics.</p>
+                </div>
+            </div>
+
+            <!-- Repair & Maintenance -->
+            <div class="service-card" onclick="window.location.href='#'"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://img.freepik.com/premium-photo/carpenter-woodwork-furniture-making-carpentry-workshop_130181-1177.jpg?w=2000"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="Repair">
+                    <div class="hover-details">
+                        <div class="detail-price">Visit Charge: ₹299</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> 2-Hour Response Time<br>
+                            <i class="fa-solid fa-check"></i> 30-Day Service Guarantee
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 5px;">Repair & Maintenance</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Fixing broken doors, windows, or furniture.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <style>
-        /* Separating Desktop and Mobile Views */
-        .mobile-only {
-            display: none;
-        }
-
-        .desktop-only {
-            display: flex;
-        }
-
-        @media (max-width: 900px) {
-            .mobile-only {
-                display: block;
-            }
-
-            .desktop-only {
-                display: none;
-            }
-
-            /* Mobile Carousel Styles */
-            .journey-mobile-view {
-                position: relative;
-            }
-
-            .journey-carousel {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                gap: 20px;
-                padding-bottom: 20px;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                /* Firefox */
-            }
-
-            .journey-carousel::-webkit-scrollbar {
-                display: none;
-            }
-
-            .journey-mobile-card {
-                min-width: 100%;
-                /* Full width for single focus */
-                scroll-snap-align: center;
-                background: var(--surface-color);
-                backdrop-filter: blur(15px);
-                border-radius: 20px;
-                overflow: hidden;
-                border: var(--glass-border);
-                box-shadow: var(--shadow-md);
-                display: flex;
-                flex-direction: column;
-            }
-
-            .j-mob-img {
-                height: 250px;
-                width: 100%;
-            }
-
-            /* Project Journey Refinements */
-            .journey-section h2 {
-                text-align: center !important;
-            }
-
-            .journey-section p {
-                display: none !important;
-            }
-
-            .journey-step {
-                width: 100%;
-                margin-left: 0;
-            }
-
-            .j-mob-img img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .j-mob-content {
-                padding: 20px;
-                text-align: center;
-            }
-
-            .j-mob-content h3 {
-                font-size: 1.5rem;
-                margin-bottom: 10px;
-                color: var(--text-dark);
-            }
-
-            .j-mob-content p {
-                display: none !important;
-                /* Hidden as per user request */
-                color: var(--text-gray);
-                font-size: 0.95rem;
-            }
-
-            /* Mobile Controls */
-            .journey-mobile-controls {
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-                margin-top: 20px;
-            }
-
-            .j-mob-btn {
-                background: white;
-                border: 1px solid #e2e8f0;
-                color: #64748b;
-                padding: 10px 18px;
-                border-radius: 12px;
-                font-weight: 600;
-                font-size: 0.9rem;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-
-            .j-mob-btn.active {
-                background: #f97316;
-                /* Orange */
-                color: white;
-                border-color: #f97316;
-                box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
-            }
-        }
-    </style>
-
-    <script>
-        // Mobile Carousel Logic
-        let currentMobStep = 1;
-        let autoScrollInterval;
-
-        function scrollToMobileStep(stepId) {
-            const carousel = document.getElementById('journeyMobileCarousel');
-            const targetCard = document.getElementById(`mob-step-${stepId}`);
-            if (!carousel || !targetCard) return;
-
-            // Update Scroll
-            carousel.scrollTo({
-                left: targetCard.offsetLeft - carousel.offsetLeft,
-                behavior: 'smooth'
-            });
-
-            // Update Buttons
-            document.querySelectorAll('.j-mob-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-step-${stepId}`).classList.add('active');
-
-            currentMobStep = stepId;
-
-            // Reset Auto Scroll Timer on manual interaction
-            resetAutoScroll();
-        }
-
-        function nextMobileStep() {
-            let next = currentMobStep + 1;
-            if (next > 4) next = 1;
-            scrollToMobileStep(next);
-        }
-
-        function startAutoScroll() {
-            if (autoScrollInterval) return;
-            autoScrollInterval = setInterval(nextMobileStep, 3500); // 3.5 seconds
-        }
-
-        function stopAutoScroll() {
-            if (autoScrollInterval) {
-                clearInterval(autoScrollInterval);
-                autoScrollInterval = null;
-            }
-        }
-
-        function resetAutoScroll() {
-            stopAutoScroll();
-            startAutoScroll();
-        }
-
-        // Initialize Auto Scroll only when visible on mobile
-        if (window.innerWidth <= 900) {
-            const carousel = document.getElementById('journeyMobileCarousel');
-
-            // Intersection Observer
-            const carouselObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        startAutoScroll();
-                    } else {
-                        stopAutoScroll();
-                    }
-                });
-            }, { threshold: 0.3 });
-
-            if (carousel) {
-                carouselObserver.observe(carousel);
-                carousel.addEventListener('touchstart', stopAutoScroll);
-                carousel.addEventListener('touchend', startAutoScroll);
-            }
-        }
-
-        // Listen for Scroll to update active button (if user swipes)
-        const carousel = document.getElementById('journeyMobileCarousel');
-        if (carousel) {
-            carousel.addEventListener('scroll', () => {
-                const scrollLeft = carousel.scrollLeft;
-                const width = carousel.offsetWidth;
-                const index = Math.round(scrollLeft / width) + 1;
-
-                if (index !== currentMobStep && index >= 1 && index <= 4) {
-                    document.querySelectorAll('.j-mob-btn').forEach(btn => btn.classList.remove('active'));
-                    const btn = document.getElementById(`btn-step-${index}`);
-                    if (btn) btn.classList.add('active');
-                    currentMobStep = index;
-                }
-            });
-        }
-
-        // Modal Logic
-        function handleContactClick(e) {
-            // Check if mobile (using same breakpoint as CSS 900px, roughly)
-            if (window.innerWidth <= 900) {
-                e.preventDefault();
-                document.getElementById('mobileContactModal').classList.add('active');
-            }
-            // else let it scroll
-        }
-
-        function closeModal() {
-            document.getElementById('mobileContactModal').classList.remove('active');
-        }
-
-        // Close modal on outside click
-        document.getElementById('mobileContactModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-    </script>
-
-    <!-- CONTACT (Desktop Only via CSS hide) -->
-    <div id="contact" class="contact-section-new section">
-        <div class="container contact-form-container">
-            <div class="form-header">
-                <h2>Get In Touch</h2>
-                <p>Ready to start your project? Let's talk.</p>
-            </div>
-
-            <div id="successMessage" style="display: none; text-align: center;">
-                <div style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"><i
-                        class="fa-regular fa-circle-check"></i></div>
-                <h3 style="font-size: 2rem; margin-bottom: 10px; color: white;">Message Sent!</h3>
-                <p style="color: var(--text-gray);">We will contact you shortly.</p>
-            </div>
-
-            <form id="contactForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
-                onsubmit="handleFormSubmit(event)">
-                <input type="hidden" name="_subject" value="New Inquiry from Skital Website">
-                <input type="hidden" name="_captcha" value="false">
-
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <i class="fa-regular fa-user input-icon"></i>
-                    <input type="text" name="name" class="form-control" placeholder="Full Name" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <i class="fa-regular fa-envelope input-icon"></i>
-                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <i class="fa-regular fa-comment-dots input-icon"></i>
-                    <textarea name="message" class="form-control" placeholder="Tell us about your needs..."
-                        style="height: 150px; resize: vertical;" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Send Message <i class="fa-regular fa-paper-plane"></i></button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Mobile Contact Modal -->
-    <div id="mobileContactModal" class="contact-modal">
-        <div class="container contact-form-container">
-            <button class="close-modal-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="form-header">
-                <h2>Get In Touch</h2>
-                <p>Ready to start your project? Let's talk.</p>
-            </div>
-
-            <!-- Duplicated form for specific mobile modal logic, or reused logic could be applied. 
-                 Using simple duplication for reliability in single file. -->
-            <form action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New Mobile Inquiry">
-                <input type="hidden" name="_captcha" value="false">
-
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <i class="fa-regular fa-user input-icon"></i>
-                    <input type="text" name="name" class="form-control" placeholder="Full Name" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <i class="fa-regular fa-envelope input-icon"></i>
-                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <i class="fa-regular fa-comment-dots input-icon"></i>
-                    <textarea name="message" class="form-control" placeholder="Tell us about your needs..."
-                        style="height: 150px; resize: vertical;" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Send Message <i class="fa-regular fa-paper-plane"></i></button>
-            </form>
-        </div>
-    </div>
+    <!-- CONTACT REMOVED -->
 
     <!-- Whatsapp -->
     <a href="https://wa.me/919899942377?text=I%20want%20to%20Redesign%20my%20House" class="whatsapp-float"
