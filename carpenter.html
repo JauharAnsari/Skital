@@ -894,8 +894,10 @@
 
             /* Reduced gap */
             .hero-section {
-                padding-top: 10px;
-                /* Since header is floating, we might need to check spacing. */
+                padding-top: 100px !important;
+                /* Increased padding to avoid cut-off */
+                min-height: 40vh !important;
+                /* Ensure reasonable height */
             }
 
             .hero-title {
@@ -1015,39 +1017,40 @@
 
             .service-card {
                 min-width: 0 !important;
-                width: 30% !important;
-                /* Force 3 columns */
-                flex: 0 0 30% !important;
+                width: 100% !important;
+                /* Full width on mobile */
+                flex: 0 0 100% !important;
                 box-sizing: border-box;
-                scroll-snap-align: none;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
-                padding: 5px 2px;
-                background: white;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-                margin-bottom: 5px;
-                border-radius: 6px;
+                margin-bottom: 20px;
+                min-height: auto !important;
+                /* Override inline height */
+                height: auto !important;
+            }
+
+            .service-card .img-wrapper {
+                height: 200px !important;
+                /* Proportional image height */
             }
 
             .service-card h3 {
-                font-size: 0.7rem !important;
-                /* Tiny text */
-                margin-top: 5px;
+                font-size: 1.5rem !important;
+                /* Larger title */
+                margin-top: 10px;
             }
 
-            /* Show only 6 items on mobile */
+            /* Show all items */
             .service-card:nth-child(n+7) {
-                display: none !important;
+                display: flex !important;
             }
 
             .service-card p {
-                display: none;
-                /* Hide description text if any, to save space, assuming only icon/title needed for small grid? User said text too. */
-                /* Actually user said "reduce size of Box and icon and text". */
-                font-size: 0.6rem !important;
-                line-height: 1;
-                margin-top: 2px;
+                display: block !important;
+                /* Show description */
+                font-size: 0.9rem !important;
+                color: var(--text-gray);
+                margin-top: 5px;
             }
 
             /* Tighten Layout for "One Frame" Feel */
