@@ -894,15 +894,16 @@
 
             /* Reduced gap */
             .hero-section {
-                padding-top: 80px !important;
-                /* Adjusted padding */
-                min-height: 25vh !important;
-                /* Smaller height for mobile */
+                padding-top: 60px !important;
+                /* Even tighter */
+                min-height: 180px !important;
+                /* Much smaller height for mobile */
+                height: auto !important;
             }
 
             .hero-title {
                 /* Reduced gap */
-                font-size: 2rem;
+                font-size: 1.8rem;
                 /* Smaller title for mobile */
                 white-space: nowrap;
                 /* Slightly smaller title to fit better */
@@ -1026,9 +1027,10 @@
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 20px;
-                min-height: auto !important;
                 /* Override inline height */
                 height: auto !important;
+                padding-bottom: 15px !important;
+                /* Reduce whitespace below text */
             }
 
             .service-card .img-wrapper {
@@ -1037,9 +1039,11 @@
             }
 
             .service-card h3 {
-                font-size: 1.5rem !important;
-                /* Larger title */
+                font-size: 1.2rem !important;
+                /* Smaller card title */
                 margin-top: 10px;
+                margin-bottom: 5px !important;
+                /* Tighten below text */
             }
 
             /* Show all items */
@@ -1378,7 +1382,7 @@
         <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             <!-- Wardrobe -->
             <div class="service-card" onclick="window.location.href='#'"
-                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden; margin-bottom: 20px;">
                 <div class="img-wrapper">
                     <img src="https://tse1.mm.bing.net/th/id/OIP.hH6QVfS4xnUuAQGNTri03QHaE8?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
                         style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
