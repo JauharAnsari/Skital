@@ -894,18 +894,20 @@
 
             /* Reduced gap */
             .hero-section {
-                padding-top: 100px !important;
-                /* Increased padding to avoid cut-off */
-                min-height: 40vh !important;
-                /* Ensure reasonable height */
+                padding-top: 80px !important;
+                /* Adjusted padding */
+                min-height: 25vh !important;
+                /* Smaller height for mobile */
             }
 
             .hero-title {
                 /* Reduced gap */
-                font-size: 1.5rem;
+                font-size: 2rem;
+                /* Smaller title for mobile */
                 white-space: nowrap;
                 /* Slightly smaller title to fit better */
-                text-align: left;
+                text-align: center;
+                /* Center align looks better usually, or keep left if intended */
             }
 
             .hero-title br {
@@ -1046,8 +1048,8 @@
             }
 
             .service-card p {
-                display: block !important;
-                /* Show description */
+                display: none !important;
+                /* Hide description text on mobile as requested */
                 font-size: 0.9rem !important;
                 color: var(--text-gray);
                 margin-top: 5px;
