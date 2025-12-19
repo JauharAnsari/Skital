@@ -300,6 +300,7 @@
 
         .icon-box i {
             background: var(--primary-gradient);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -1373,6 +1374,69 @@
             color: #e2e8f0;
             line-height: 1.4;
         }
+
+        /* CONTACT MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            transform: translateY(30px);
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .close-modal-btn:hover {
+            background: #fee2e2;
+            color: #ef4444;
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 
@@ -1399,7 +1463,7 @@
     <div class="container section services-section" style="animation-delay: 0.2s; padding-top: 60px;">
         <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             <!-- Wardrobe -->
-            <div class="service-card" onclick="window.location.href='#'"
+            <div class="service-card"
                 style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden; margin-bottom: 20px;">
                 <div class="img-wrapper">
                     <img src="https://tse1.mm.bing.net/th/id/OIP.hH6QVfS4xnUuAQGNTri03QHaE8?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
@@ -1422,7 +1486,7 @@
             </div>
 
             <!-- Kitchen -->
-            <div class="service-card" onclick="window.location.href='#'"
+            <div class="service-card"
                 style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
                 <div class="img-wrapper">
                     <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80"
@@ -1445,7 +1509,7 @@
             </div>
 
             <!-- Door -->
-            <div class="service-card" onclick="window.location.href='#'"
+            <div class="service-card"
                 style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
                 <div class="img-wrapper">
                     <img src="https://tse3.mm.bing.net/th/id/OIP.1JYv3NcEgR2bgagIe0F2ewHaLH?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
@@ -1468,7 +1532,7 @@
             </div>
 
             <!-- Repair & Maintenance -->
-            <div class="service-card" onclick="window.location.href='#'"
+            <div class="service-card"
                 style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
                 <div class="img-wrapper">
                     <img src="https://img.freepik.com/premium-photo/carpenter-woodwork-furniture-making-carpentry-workshop_130181-1177.jpg?w=2000"
@@ -1499,6 +1563,81 @@
         target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
     <script>
+        // MODAL LOGIC
+        const modal = document.getElementById('contactModal');
+        const modalServiceName = document.getElementById('modalServiceName');
+        const modalMessage = document.getElementById('modalMessage');
+
+        function openModal(serviceName) {
+            modalServiceName.innerText = serviceName;
+            // Pre-fill message with context
+            modalMessage.value = `Hi, I am interested in your ${serviceName} services. Please contact me back.`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on clicking overlay
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Handle Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('modalName').value;
+            const email = document.getElementById('modalEmail').value;
+            const message = document.getElementById('modalMessage').value;
+            const service = modalServiceName.innerText;
+
+            const subject = encodeURIComponent(`Inquiry for ${service} Service - Skital`);
+            // Format body content securely
+            const body = encodeURIComponent(
+                `Name: ${name}\n` +
+                `Email: ${email}\n` +
+                `Service: ${service}\n\n` +
+                `Message:\n${message}`
+            );
+
+            // Open user's email client
+            window.location.href = `mailto:contact@skital.com?subject=${subject}&body=${body}`;
+
+            // Close modal after a delay
+            setTimeout(() => {
+                closeModal();
+                alert('Thank you! Your email client has been opened with the inquiry details.');
+            }, 1000);
+
+            return false;
+        }
+
+        // Attach click listeners to service cards
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    // Check if clicked element is NOT a button or link (if any exist inside card)
+                    // In this design, the whole card is clickable.
+                    // We need to extract the text. The logic depends on card structure.
+                    // Looking at HTML, there is .service-text element
+                    const titleElement = card.querySelector('.service-text');
+                    if (titleElement) {
+                        const title = titleElement.innerText.trim();
+                        openModal(title);
+                    }
+                });
+            });
+        });
+
         // Count Up Animation
         const observerOptions = { threshold: 0.5 };
         const observer = new IntersectionObserver((entries) => {
@@ -1695,6 +1834,63 @@
             }, 200);
         }
     </script>
+    <!-- CONTACT MODAL -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <button class="close-modal-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h3 style="font-size: 2.2rem; font-weight: 800; color: #1e293b; margin-bottom: 10px;">Get In Touch
+                </h3>
+                <p style="color: #64748b;">Ready to start your project? Let's talk.</p>
+                <!-- Hidden service indicator for context -->
+                <div id="modalServiceName" style="display: none;">Service</div>
+            </div>
+
+            <form id="modalContactForm" onsubmit="return handleModalSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label" style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Name</label>
+                    <div class="input-wrapper" style="position: relative;">
+                        <i class="fa-regular fa-user input-icon"
+                            style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
+                        <input type="text" id="modalName" class="form-control" placeholder="Full Name"
+                            style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"
+                        style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Email</label>
+                    <div class="input-wrapper" style="position: relative;">
+                        <i class="fa-regular fa-envelope input-icon"
+                            style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
+                        <input type="email" id="modalEmail" class="form-control" placeholder="Email Address"
+                            style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"
+                        style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Message</label>
+                    <div class="input-wrapper" style="position: relative;">
+                        <i class="fa-regular fa-comment-dots input-icon"
+                            style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
+                        <textarea id="modalMessage" class="form-control" rows="4"
+                            placeholder="Tell us about your needs..."
+                            style="padding-left: 45px; padding-top: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; resize: none;"
+                            required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="primary-btn"
+                    style="width: 100%; justify-content: center; margin-top: 10px; background: #3b82f6;">
+                    Send Message <i class="fa-regular fa-paper-plane" style="margin-left: 8px;"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

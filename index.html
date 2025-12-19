@@ -883,13 +883,25 @@
                 background: rgba(255, 255, 255, 0.1) !important;
                 /* Glass effect */
                 backdrop-filter: blur(10px) !important;
-                margin: 10px 15px;
-                border-radius: 20px;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                /* Just the border */
-                padding: 10px 20px;
+                margin: 0 !important;
+                /* FULL WIDTH */
+                width: 100% !important;
+                border-radius: 0 0 20px 20px !important;
+                /* Only bottom corners */
+                border: none !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+                padding: 10px 0 !important;
+                /* Zero side padding on wrapper */
                 box-shadow: none !important;
-                top: 10px;
+                top: 0 !important;
+                left: 0 !important;
+            }
+
+            header .container {
+                padding: 0 15px !important;
+                /* Minimal padding for absolute corners */
+                width: 100% !important;
+                max-width: 100% !important;
             }
 
             /* Reduced gap */
@@ -904,6 +916,11 @@
                 white-space: nowrap;
                 /* Slightly smaller title to fit better */
                 text-align: left;
+                /* Remove animation for mobile */
+                animation: none !important;
+                background: none !important;
+                -webkit-text-fill-color: var(--text-dark) !important;
+                color: var(--text-dark) !important;
             }
 
             .hero-title br {
@@ -1228,6 +1245,7 @@
                 /* Green like uploaded image */
                 line-height: normal;
                 /* Reset line height */
+                justify-content: center !important;
             }
 
             /* Hide Text "Check" in button, keep icon */
@@ -1246,6 +1264,13 @@
                 /* Reset */
                 transform: translateY(0);
                 /* Reset any transform */
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 100% !important;
+                height: 100% !important;
+                line-height: 0 !important;
+                padding-right: 5px !important;
             }
 
             /* Change arrow to magnifying glass search icon if needed, but user said 'search button' look like this. 
@@ -1320,7 +1345,7 @@
     <!-- HERO SECTION (Restored & Dark Mode) -->
     <section class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title">Building Your Vision<br>With Precision.</h1>
+            <h1 class="hero-title">Building Your Vision <br>With Precision.</h1>
             <p class="hero-subtitle">Premium construction, interior design, and renovation services tailored for modern
                 living spaces.</p>
             <div class="cta-btns">
@@ -1715,7 +1740,7 @@
 
         function startAutoScroll() {
             if (autoScrollInterval) return;
-            autoScrollInterval = setInterval(nextMobileStep, 3500); // 3.5 seconds
+            autoScrollInterval = setInterval(nextMobileStep, 1000); // 1.0 second (Faster)
         }
 
         function stopAutoScroll() {
