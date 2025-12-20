@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skital - Premium Construction & Design</title>
+    <title>Skital - Expert Plumbing Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
@@ -300,6 +300,7 @@
 
         .icon-box i {
             background: var(--primary-gradient);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -723,6 +724,10 @@
             /* Horizontal Scroll for Mobile */
             .stats-grid,
             .services-grid {
+                /* Remove flex/scroll from general mobile query as we are overriding in specific block, but for safety kept or removed. 
+                  Actually the block at 932 overrides this. But let's clean up if possible.
+                  For now, I will leave this as is to avoid conflicts with other pages if they share CSS, 
+                  but strictly for Carpenter page, the detailed query below handles it. */
                 display: flex;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
@@ -883,44 +888,32 @@
                 background: rgba(255, 255, 255, 0.1) !important;
                 /* Glass effect */
                 backdrop-filter: blur(10px) !important;
-                margin: 0 !important;
-                /* FULL WIDTH */
-                width: 100% !important;
-                border-radius: 0 0 20px 20px !important;
-                /* Only bottom corners */
-                border: none !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-                padding: 10px 0 !important;
-                /* Zero side padding on wrapper */
+                margin: 10px 15px;
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                /* Just the border */
+                padding: 10px 20px;
                 box-shadow: none !important;
-                top: 0 !important;
-                left: 0 !important;
-            }
-
-            header .container {
-                padding: 0 15px !important;
-                /* Minimal padding for absolute corners */
-                width: 100% !important;
-                max-width: 100% !important;
+                top: 10px;
             }
 
             /* Reduced gap */
             .hero-section {
-                padding-top: 10px;
-                /* Since header is floating, we might need to check spacing. */
+                padding-top: 50px !important;
+                /* Even tighter */
+                min-height: 140px !important;
+                /* Much smaller height for mobile */
+                height: auto !important;
             }
 
             .hero-title {
                 /* Reduced gap */
-                font-size: 1.5rem;
-                white-space: nowrap;
+                font-size: 2.2rem !important;
+                /* Smaller title for mobile */
+                white-space: normal;
                 /* Slightly smaller title to fit better */
-                text-align: left;
-                /* Remove animation for mobile */
-                animation: none !important;
-                background: none !important;
-                -webkit-text-fill-color: var(--text-dark) !important;
-                color: var(--text-dark) !important;
+                text-align: center;
+                /* Center align looks better usually, or keep left if intended */
             }
 
             .hero-title br {
@@ -940,18 +933,15 @@
 
             /* Stats: Row Layout (Icon Left, Text Right) */
             /* Stats & Services: Single Frame for Stats, Scroll for Services */
-            /* Mobile Services: 3-Column Grid */
+            /* Mobile Services: 2-Column Grid */
             .services-grid {
-                display: flex !important;
-                flex-wrap: wrap !important;
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px !important;
                 overflow-x: visible !important;
                 scroll-snap-type: none;
-                gap: 5px;
-                /* Tight gap */
-                padding-bottom: 0px;
-                margin: 0;
-                padding-left: 5px;
-                padding-right: 5px;
+                margin: 0 !important;
+                padding: 0 10px !important;
                 justify-content: center;
             }
 
@@ -1032,39 +1022,60 @@
 
             .service-card {
                 min-width: 0 !important;
-                width: 30% !important;
-                /* Force 3 columns */
-                flex: 0 0 30% !important;
+                width: 100% !important;
+                flex: none !important;
                 box-sizing: border-box;
-                scroll-snap-align: none;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
-                padding: 5px 2px;
-                background: white;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-                margin-bottom: 5px;
-                border-radius: 6px;
+                margin-bottom: 0px;
+                min-height: 0 !important;
+                height: 100% !important;
+                padding-bottom: 10px !important;
+                border-radius: 20px;
+                box-shadow: none;
+                background: transparent;
+            }
+
+            .service-card .img-wrapper {
+                height: 140px !important;
+                border-radius: 16px;
+                margin-bottom: 10px;
+            }
+
+            /* Fix inner padding of the text container on mobile */
+            .service-card>div:last-child {
+                padding: 0 !important;
+                text-align: center;
+            }
+
+            .service-card .service-text {
+                margin-bottom: 0 !important;
+                font-size: 1rem !important;
+                font-weight: 700;
+                color: var(--text-dark);
             }
 
             .service-card h3 {
-                font-size: 0.7rem !important;
-                /* Tiny text */
+                font-size: 1rem !important;
                 margin-top: 5px;
+                margin-bottom: 0 !important;
             }
 
-            /* Show only 6 items on mobile */
-            .service-card:nth-child(n+7) {
+            .desktop-only-text {
                 display: none !important;
             }
 
+            /* Show all items */
+            .service-card:nth-child(n+7) {
+                display: flex !important;
+            }
+
             .service-card p {
-                display: none;
-                /* Hide description text if any, to save space, assuming only icon/title needed for small grid? User said text too. */
-                /* Actually user said "reduce size of Box and icon and text". */
-                font-size: 0.6rem !important;
-                line-height: 1;
-                margin-top: 2px;
+                display: none !important;
+                /* Hide description text on mobile as requested */
+                font-size: 0.9rem !important;
+                color: var(--text-gray);
+                margin-top: 5px;
             }
 
             /* Tighten Layout for "One Frame" Feel */
@@ -1132,7 +1143,7 @@
             }
 
             .services-section {
-                padding-top: 5px !important;
+                padding-top: 30px !important;
                 margin-top: 0 !important;
             }
 
@@ -1245,7 +1256,6 @@
                 /* Green like uploaded image */
                 line-height: normal;
                 /* Reset line height */
-                justify-content: center !important;
             }
 
             /* Hide Text "Check" in button, keep icon */
@@ -1264,13 +1274,6 @@
                 /* Reset */
                 transform: translateY(0);
                 /* Reset any transform */
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                width: 100% !important;
-                height: 100% !important;
-                line-height: 0 !important;
-                padding-right: 5px !important;
             }
 
             /* Change arrow to magnifying glass search icon if needed, but user said 'search button' look like this. 
@@ -1327,6 +1330,113 @@
         .whatsapp-float:hover {
             transform: scale(1.1);
         }
+
+        /* HOVER OVERLAY STYLES */
+        .service-card .img-wrapper {
+            position: relative;
+            height: 250px;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .service-card .hover-details {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .service-card:hover .hover-details {
+            transform: translateY(0);
+        }
+
+        .detail-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fbbf24;
+            /* Gold/Amber */
+            margin-bottom: 5px;
+        }
+
+        .detail-feat {
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            line-height: 1.4;
+        }
+
+        /* CONTACT MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            transform: translateY(30px);
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .close-modal-btn:hover {
+            background: #fee2e2;
+            color: #ef4444;
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 
@@ -1335,575 +1445,200 @@
     <div class="ambient-blob ambient-1"></div>
     <div class="ambient-blob ambient-2"></div>
 
-    <header>
-        <div class="container header-content">
-            <div class="brand-name">Skital</div>
-            <a href="#contact" class="nav-btn" onclick="handleContactClick(event)">Contact</a>
-        </div>
-    </header>
-
-    <!-- HERO SECTION (Restored & Dark Mode) -->
-    <section class="hero-section">
+    <!-- PLUMBER HERO -->
+    <section class="hero-section"
+        style="min-height: 50vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=1600&q=80'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px;">
         <div class="hero-content">
-            <h1 class="hero-title">Building Your Vision <br>With Precision.</h1>
-            <p class="hero-subtitle">Premium construction, interior design, and renovation services tailored for modern
-                living spaces.</p>
-            <div class="cta-btns">
-                <a href="#availability" class="primary-btn">Check Availability <i
-                        class="fa-solid fa-location-dot"></i></a>
-                <a href="#services" class="secondary-btn">View Services</a>
-            </div>
+            <h1 class="hero-title"
+                style="color: white; -webkit-text-fill-color: white; font-size: 5rem; margin-bottom: 10px;">Plumber
+            </h1>
+            <p
+                style="color: rgba(255,255,255,0.95); font-size: 1.2rem; max-width: 600px; margin: 0 auto; font-weight: 500;">
+                Expert
+                Plumbing & Pipe Solutions</p>
         </div>
     </section>
 
-    <!-- STATS -->
-    <div class="container section stats-section" style="animation-delay: 0.1s;">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="icon-box"><i class="fa-solid fa-briefcase"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value" data-target="2547">0</div>
-                    <div class="stat-label">Total Projects</div>
-                    <div class="stat-sub">Successfully completed</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="icon-box"><i class="fa-solid fa-medal"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value" style="display: flex; gap: 5px; align-items: center;">
-                        <span style="color: #22d3ee; font-size: 1.2rem;">★★★★★</span>(4.9)
-                    </div>
-                    <div class="stat-label">Customer Rating</div>
-                    <div class="stat-sub">Based on 1,234 reviews</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="icon-box"><i class="fa-regular fa-calendar-check"></i></div>
-                <div class="stat-info">
-                    <div class="stat-value" data-target="25">0</div>
-                    <div class="stat-label">Years Experience</div>
-                    <div class="stat-sub">Excellence since 2000</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- AVAILABILITY -->
-    <div id="availability" class="container section availability-section" style="animation-delay: 0.2s;">
-        <div class="pincode-card">
-            <div class="pin-icon-top"><i class="fa-solid fa-location-dot"></i></div>
-            <h2>Check Availability</h2>
-            <p style="color: var(--text-gray); margin-bottom: 30px;">Enter your pincode to see if we serve your area
-                (Delhi Only)</p>
-            <div class="search-container">
-                <div class="input-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon-input"></i>
-                    <input type="text" id="pincodeInput" class="pincode-input" placeholder="Enter 6-digit pincode"
-                        maxlength="6" oninput="updateStatusBox(this.value)">
-                </div>
-                <button class="go-btn" onclick="checkPincode()">Check <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-            <div id="statusBox" class="status-box status-ready">
-                <i class="fa-solid fa-magnifying-glass"></i> Ready to search!
-            </div>
-        </div>
-    </div>
-
-    <!-- SERVICES -->
-    <div id="services" class="container section services-section" style="animation-delay: 0.3s;">
-        <h2>Our Expertise</h2>
-        <p class="service-sub">Comprehensive solutions for every need</p>
-        <div class="services-grid">
-            <div class="service-card" onclick="location.href='carpenter.html'">
-                <div class="service-icon-circle"><i class="fa-solid fa-hammer"></i></div>
-                <div class="service-text">Carpenter</div>
-            </div>
-            <div class="service-card" onclick="location.href='plumber.html'">
-                <div class="service-icon-circle"><i class="fa-solid fa-faucet-drip"></i></div>
-                <div class="service-text">Plumber</div>
-            </div>
-            <div class="service-card" onclick="location.href='fabricator.html'">
-                <div class="service-icon-circle"><i class="fa-solid fa-scissors"></i></div>
-                <div class="service-text">Fabricator</div>
-            </div>
-            <div class="service-card" onclick="location.href='civil-work.html'">
-                <div class="service-icon-circle"><i class="fa-solid fa-helmet-safety"></i></div>
-                <div class="service-text">Civil Work</div>
-            </div>
-            <div class="service-card" onclick="location.href='flooring.html'">
-                <div class="service-icon-circle"><i class="fa-solid fa-layer-group"></i></div>
-                <div class="service-text">Flooring</div>
-            </div>
-            <div class="service-card" onclick="location.href='terrace.html'">
-                <div class="service-icon-circle"><i class="fa-solid fa-tree"></i></div>
-                <div class="service-text">Terrace</div>
-            </div>
-            <div class="service-card" onclick="location.href='interior.html'">
-                <div class="service-icon-circle"><i class="fa-solid fa-couch"></i></div>
-                <div class="service-text">Interior</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon-circle"><i class="fa-solid fa-ellipsis"></i></div>
-                <div class="service-text">More</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JOURNEY -->
-    <div class="journey-section">
-        <div class="container section">
-            <h2 style="text-align: left; margin-bottom: 5px;">Project Journey Showcase</h2>
-            <p style="text-align: left; color: var(--text-gray); margin-bottom: 30px;">Witness the transformation from
-                concept to completion</p>
-
-            <!-- DESKTOP VIEW (Hidden on Mobile) -->
-            <div class="journey-container desktop-only">
-                <!-- Left Column: Steps Navigation -->
-                <div class="journey-steps-col">
-                    <!-- Step 1 -->
-                    <div class="journey-step-card active" onclick="setJourneyStep(1)">
-                        <div class="step-number">1</div>
-                        <div class="step-info">
-                            <h3>Discovery & Site Visit</h3>
-                            <p>We understand your vision, constraints and walk through the space together.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="journey-step-card" onclick="setJourneyStep(2)">
-                        <div class="step-number">2</div>
-                        <div class="step-info">
-                            <h3>Design & Planning</h3>
-                            <p>Concepts, layouts and material recommendations tailored to your budget.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="journey-step-card" onclick="setJourneyStep(3)">
-                        <div class="step-number">3</div>
-                        <div class="step-info">
-                            <h3>Execution</h3>
-                            <p>Our vetted professionals execute the plan with regular updates and check-ins.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="journey-step-card" onclick="setJourneyStep(4)">
-                        <div class="step-number">4</div>
-                        <div class="step-info">
-                            <h3>Handover & Aftercare</h3>
-                            <p>Walkthrough, quality checks and support even after the project is done.</p>
+    <!-- PLUMBER SERVICES -->
+    <div class="container section services-section" style="animation-delay: 0.2s; padding-top: 60px;">
+        <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <!-- Pipe Repair -->
+            <div class="service-card"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.XDWNmHoM2MeJ1N34eIf7tAHaE6?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="Pipe Repair">
+                    <div class="hover-details">
+                        <div class="detail-price">Starts @ ₹299</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> Leak Detection<br>
+                            <i class="fa-solid fa-check"></i> Quick Repair
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Column: Visual Display -->
-                <div class="journey-image-col">
-                    <div class="journey-img-wrapper">
-                        <img id="journeyImg"
-                            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
-                            alt="Journey Step">
-                    </div>
-
-                    <div class="step-details-overlay">
-                        <span id="journeyStepBadge" class="step-badge">STEP 1</span>
-                        <h3 id="journeyTitle" class="step-display-title">Discovery & Site Visit</h3>
-                        <p id="journeyDesc" class="step-display-desc">We understand your vision, constraints and walk
-                            through the space together.</p>
-                        <div id="journeyTags" class="step-tags">
-                            <span class="step-tag">Progress photos</span>
-                            <span class="step-tag">Quality checks</span>
-                            <span class="step-tag">Project manager</span>
-                        </div>
-                    </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Pipe Repair</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Expert leak detection and repair for all types
+                        of pipes.</p>
                 </div>
             </div>
 
-            <!-- MOBILE VIEW (Hidden on Desktop) -->
-            <div class="journey-mobile-view mobile-only">
-                <div class="journey-carousel" id="journeyMobileCarousel">
-                    <!-- Step 1 -->
-                    <div class="journey-mobile-card" id="mob-step-1">
-                        <div class="j-mob-img">
-                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
-                                alt="Step 1">
-                        </div>
-                        <div class="j-mob-content">
-                            <h3>Discovery & Site Visit</h3>
-                            <p>We understand your vision, constraints and walk through the space together.</p>
-                        </div>
-                    </div>
-                    <!-- Step 2 -->
-                    <div class="journey-mobile-card" id="mob-step-2">
-                        <div class="j-mob-img">
-                            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"
-                                alt="Step 2">
-                        </div>
-                        <div class="j-mob-content">
-                            <h3>Design & Planning</h3>
-                            <p>Concepts, layouts and material recommendations tailored to your budget.</p>
-                        </div>
-                    </div>
-                    <!-- Step 3 -->
-                    <div class="journey-mobile-card" id="mob-step-3">
-                        <div class="j-mob-img">
-                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80"
-                                alt="Step 3">
-                        </div>
-                        <div class="j-mob-content">
-                            <h3>Execution</h3>
-                            <p>Our vetted professionals execute the plan with regular updates and check-ins.</p>
-                        </div>
-                    </div>
-                    <!-- Step 4 -->
-                    <div class="journey-mobile-card" id="mob-step-4">
-                        <div class="j-mob-img">
-                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
-                                alt="Step 4">
-                        </div>
-                        <div class="j-mob-content">
-                            <h3>Handover & Aftercare</h3>
-                            <p>Walkthrough, quality checks and support even after the project is done.</p>
+            <!-- Bathroom Fitting -->
+            <div class="service-card"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://images.victorianplumbing.co.uk/images/8063e057-25e5-4a0c-9d8f-89927e89d062/3a4b40d9-6f77-43ca-9d0f-7ec557891940/bathroom-fittings.jpg"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="Bathroom Fitting">
+                    <div class="hover-details">
+                        <div class="detail-price">Starts @ ₹499</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> Taps & Showers<br>
+                            <i class="fa-solid fa-check"></i> Professional Installation
                         </div>
                     </div>
                 </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Bathroom Fitting</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Installation and repair of taps, showers, and
+                        sanitary ware.</p>
+                </div>
+            </div>
 
-                <!-- Custom Mobile Controls -->
-                <div class="journey-mobile-controls">
-                    <button class="j-mob-btn active" onclick="scrollToMobileStep(1)" id="btn-step-1">Step 1</button>
-                    <button class="j-mob-btn" onclick="scrollToMobileStep(2)" id="btn-step-2">Step 2</button>
-                    <button class="j-mob-btn" onclick="scrollToMobileStep(3)" id="btn-step-3">Step 3</button>
-                    <button class="j-mob-btn" onclick="scrollToMobileStep(4)" id="btn-step-4">Final</button>
+            <!-- Water Tank -->
+            <div class="service-card"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://regencyplumbing.co.nz/wp-content/uploads/2021/01/Promax-3000-litre-water-tank-fitted-in-Auckland-by-Regency-Plumbing-1-1024x1024.jpeg"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="Water Tank">
+                    <div class="hover-details">
+                        <div class="detail-price">Starts @ ₹999</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> Tank Cleaning<br>
+                            <i class="fa-solid fa-check"></i> New Installation
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Water Tank</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Water tank cleaning, installation and
+                        maintenance services.</p>
+                </div>
+            </div>
+
+            <!-- Drainage -->
+            <div class="service-card"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542013936693-884638332954?w=800&q=80"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="Drainage">
+                    <div class="hover-details">
+                        <div class="detail-price">Visit Charge: ₹399</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> Quick Unclogging<br>
+                            <i class="fa-solid fa-check"></i> Odor Treatment
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 5px;">Drainage <span
+                            class="desktop-only-text">& Sewage</span></div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Clearing blockages, cleaning and sewage
+                        maintenance.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <style>
-        /* Separating Desktop and Mobile Views */
-        .mobile-only {
-            display: none;
-        }
-
-        .desktop-only {
-            display: flex;
-        }
-
-        @media (max-width: 900px) {
-            .mobile-only {
-                display: block;
-            }
-
-            .desktop-only {
-                display: none;
-            }
-
-            /* Mobile Carousel Styles */
-            .journey-mobile-view {
-                position: relative;
-            }
-
-            .journey-carousel {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                gap: 20px;
-                padding-bottom: 20px;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                /* Firefox */
-            }
-
-            .journey-carousel::-webkit-scrollbar {
-                display: none;
-            }
-
-            .journey-mobile-card {
-                min-width: 100%;
-                /* Full width for single focus */
-                scroll-snap-align: center;
-                background: var(--surface-color);
-                backdrop-filter: blur(15px);
-                border-radius: 20px;
-                overflow: hidden;
-                border: var(--glass-border);
-                box-shadow: var(--shadow-md);
-                display: flex;
-                flex-direction: column;
-            }
-
-            .j-mob-img {
-                height: 250px;
-                width: 100%;
-            }
-
-            /* Project Journey Refinements */
-            .journey-section h2 {
-                text-align: center !important;
-            }
-
-            .journey-section p {
-                display: none !important;
-            }
-
-            .journey-step {
-                width: 100%;
-                margin-left: 0;
-            }
-
-            .j-mob-img img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .j-mob-content {
-                padding: 20px;
-                text-align: center;
-            }
-
-            .j-mob-content h3 {
-                font-size: 1.5rem;
-                margin-bottom: 10px;
-                color: var(--text-dark);
-            }
-
-            .j-mob-content p {
-                display: none !important;
-                /* Hidden as per user request */
-                color: var(--text-gray);
-                font-size: 0.95rem;
-            }
-
-            /* Mobile Controls */
-            .journey-mobile-controls {
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-                margin-top: 20px;
-            }
-
-            .j-mob-btn {
-                background: white;
-                border: 1px solid #e2e8f0;
-                color: #64748b;
-                padding: 10px 18px;
-                border-radius: 12px;
-                font-weight: 600;
-                font-size: 0.9rem;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-
-            .j-mob-btn.active {
-                background: #f97316;
-                /* Orange */
-                color: white;
-                border-color: #f97316;
-                box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
-            }
-        }
-    </style>
-
-    <script>
-        // Mobile Carousel Logic
-        let currentMobStep = 1;
-        let autoScrollInterval;
-
-        function scrollToMobileStep(stepId) {
-            const carousel = document.getElementById('journeyMobileCarousel');
-            const targetCard = document.getElementById(`mob-step-${stepId}`);
-            if (!carousel || !targetCard) return;
-
-            // Update Scroll
-            carousel.scrollTo({
-                left: targetCard.offsetLeft - carousel.offsetLeft,
-                behavior: 'smooth'
-            });
-
-            // Update Buttons
-            document.querySelectorAll('.j-mob-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-step-${stepId}`).classList.add('active');
-
-            currentMobStep = stepId;
-
-            // Reset Auto Scroll Timer on manual interaction
-            resetAutoScroll();
-        }
-
-        function nextMobileStep() {
-            let next = currentMobStep + 1;
-            if (next > 4) next = 1;
-            scrollToMobileStep(next);
-        }
-
-        function startAutoScroll() {
-            if (autoScrollInterval) return;
-            autoScrollInterval = setInterval(nextMobileStep, 1000); // 1.0 second (Faster)
-        }
-
-        function stopAutoScroll() {
-            if (autoScrollInterval) {
-                clearInterval(autoScrollInterval);
-                autoScrollInterval = null;
-            }
-        }
-
-        function resetAutoScroll() {
-            stopAutoScroll();
-            startAutoScroll();
-        }
-
-        // Initialize Auto Scroll only when visible on mobile
-        if (window.innerWidth <= 900) {
-            const carousel = document.getElementById('journeyMobileCarousel');
-
-            // Intersection Observer
-            const carouselObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        startAutoScroll();
-                    } else {
-                        stopAutoScroll();
-                    }
-                });
-            }, { threshold: 0.3 });
-
-            if (carousel) {
-                carouselObserver.observe(carousel);
-                carousel.addEventListener('touchstart', stopAutoScroll);
-                carousel.addEventListener('touchend', startAutoScroll);
-            }
-        }
-
-        // Listen for Scroll to update active button (if user swipes)
-        const carousel = document.getElementById('journeyMobileCarousel');
-        if (carousel) {
-            carousel.addEventListener('scroll', () => {
-                const scrollLeft = carousel.scrollLeft;
-                const width = carousel.offsetWidth;
-                const index = Math.round(scrollLeft / width) + 1;
-
-                if (index !== currentMobStep && index >= 1 && index <= 4) {
-                    document.querySelectorAll('.j-mob-btn').forEach(btn => btn.classList.remove('active'));
-                    const btn = document.getElementById(`btn-step-${index}`);
-                    if (btn) btn.classList.add('active');
-                    currentMobStep = index;
-                }
-            });
-        }
-
-        // Modal Logic
-        function handleContactClick(e) {
-            // Check if mobile (using same breakpoint as CSS 900px, roughly)
-            if (window.innerWidth <= 900) {
-                e.preventDefault();
-                document.getElementById('mobileContactModal').classList.add('active');
-            }
-            // else let it scroll
-        }
-
-        function closeModal() {
-            document.getElementById('mobileContactModal').classList.remove('active');
-        }
-
-        // Close modal on outside click
-        document.getElementById('mobileContactModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-    </script>
-
-    <!-- CONTACT (Desktop Only via CSS hide) -->
-    <div id="contact" class="contact-section-new section">
-        <div class="container contact-form-container">
-            <div class="form-header">
-                <h2>Get In Touch</h2>
-                <p>Ready to start your project? Let's talk.</p>
-            </div>
-
-            <div id="successMessage" style="display: none; text-align: center;">
-                <div style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"><i
-                        class="fa-regular fa-circle-check"></i></div>
-                <h3 style="font-size: 2rem; margin-bottom: 10px; color: white;">Message Sent!</h3>
-                <p style="color: var(--text-gray);">We will contact you shortly.</p>
-            </div>
-
-            <form id="contactForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
-                onsubmit="handleFormSubmit(event)">
-                <input type="hidden" name="_subject" value="New Inquiry from Skital Website">
-                <input type="hidden" name="_captcha" value="false">
-
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <i class="fa-regular fa-user input-icon"></i>
-                    <input type="text" name="name" class="form-control" placeholder="Full Name" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <i class="fa-regular fa-envelope input-icon"></i>
-                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <i class="fa-regular fa-comment-dots input-icon"></i>
-                    <textarea name="message" class="form-control" placeholder="Tell us about your needs..."
-                        style="height: 150px; resize: vertical;" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Send Message <i class="fa-regular fa-paper-plane"></i></button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Mobile Contact Modal -->
-    <div id="mobileContactModal" class="contact-modal">
-        <div class="container contact-form-container">
-            <button class="close-modal-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="form-header">
-                <h2>Get In Touch</h2>
-                <p>Ready to start your project? Let's talk.</p>
-            </div>
-
-            <!-- Duplicated form for specific mobile modal logic, or reused logic could be applied. 
-                 Using simple duplication for reliability in single file. -->
-            <form action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New Mobile Inquiry">
-                <input type="hidden" name="_captcha" value="false">
-
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <i class="fa-regular fa-user input-icon"></i>
-                    <input type="text" name="name" class="form-control" placeholder="Full Name" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <i class="fa-regular fa-envelope input-icon"></i>
-                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <i class="fa-regular fa-comment-dots input-icon"></i>
-                    <textarea name="message" class="form-control" placeholder="Tell us about your needs..."
-                        style="height: 150px; resize: vertical;" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Send Message <i class="fa-regular fa-paper-plane"></i></button>
-            </form>
-        </div>
-    </div>
+    <!-- CONTACT REMOVED -->
 
     <!-- Whatsapp -->
     <a href="https://wa.me/919899942377?text=I%20want%20to%20Redesign%20my%20House" class="whatsapp-float"
         target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
     <script>
+        // MODAL LOGIC
+        const modal = document.getElementById('contactModal');
+        const modalServiceName = document.getElementById('modalServiceName');
+        const modalMessage = document.getElementById('modalMessage');
+
+        function openModal(serviceName) {
+            modalServiceName.innerText = serviceName;
+            // Pre-fill message with context
+            modalMessage.value = `Hi, I am interested in your ${serviceName} services. Please contact me back.`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on clicking overlay
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Handle Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('modalName').value;
+            const email = document.getElementById('modalEmail').value;
+            const message = document.getElementById('modalMessage').value;
+            const service = modalServiceName.innerText;
+
+            const subject = encodeURIComponent(`Inquiry for ${service} Service - Skital`);
+            // Format body content securely
+            const body = encodeURIComponent(
+                `Name: ${name}\n` +
+                `Email: ${email}\n` +
+                `Service: ${service}\n\n` +
+                `Message:\n${message}`
+            );
+
+            // Open user's email client
+            window.location.href = `mailto:contact@skital.com?subject=${subject}&body=${body}`;
+
+            // Close modal after a delay
+            setTimeout(() => {
+                closeModal();
+                alert('Thank you! Your email client has been opened with the inquiry details.');
+            }, 1000);
+
+            return false;
+        }
+
+        // Attach click listeners to service cards
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    // Check if clicked element is NOT a button or link (if any exist inside card)
+                    // In this design, the whole card is clickable.
+                    // We need to extract the text. The logic depends on card structure.
+                    // Looking at HTML, there is .service-text element
+                    const titleElement = card.querySelector('.service-text');
+                    if (titleElement) {
+                        const title = titleElement.innerText.trim();
+                        openModal(title);
+                    }
+                });
+            });
+        });
+
         // Count Up Animation
         const observerOptions = { threshold: 0.5 };
         const observer = new IntersectionObserver((entries) => {
@@ -2100,6 +1835,63 @@
             }, 200);
         }
     </script>
+    <!-- CONTACT MODAL -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <button class="close-modal-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h3 style="font-size: 2.2rem; font-weight: 800; color: #1e293b; margin-bottom: 10px;">Get In Touch
+                </h3>
+                <p style="color: #64748b;">Ready to start your project? Let's talk.</p>
+                <!-- Hidden service indicator for context -->
+                <div id="modalServiceName" style="display: none;">Service</div>
+            </div>
+
+            <form id="modalContactForm" onsubmit="return handleModalSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label" style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Name</label>
+                    <div class="input-wrapper" style="position: relative;">
+                        <i class="fa-regular fa-user input-icon"
+                            style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
+                        <input type="text" id="modalName" class="form-control" placeholder="Full Name"
+                            style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"
+                        style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Email</label>
+                    <div class="input-wrapper" style="position: relative;">
+                        <i class="fa-regular fa-envelope input-icon"
+                            style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
+                        <input type="email" id="modalEmail" class="form-control" placeholder="Email Address"
+                            style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"
+                        style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Message</label>
+                    <div class="input-wrapper" style="position: relative;">
+                        <i class="fa-regular fa-comment-dots input-icon"
+                            style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
+                        <textarea id="modalMessage" class="form-control" rows="4"
+                            placeholder="Tell us about your needs..."
+                            style="padding-left: 45px; padding-top: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; resize: none;"
+                            required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="primary-btn"
+                    style="width: 100%; justify-content: center; margin-top: 10px; background: #3b82f6;">
+                    Send Message <i class="fa-regular fa-paper-plane" style="margin-left: 8px;"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
