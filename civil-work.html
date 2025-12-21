@@ -1594,29 +1594,37 @@
 
         function handleModalSubmit(e) {
             e.preventDefault();
-            const name = document.getElementById('modalName').value;
-            const email = document.getElementById('modalEmail').value;
-            const message = document.getElementById('modalMessage').value;
-            const service = modalServiceName.innerText;
+            const form = document.getElementById('modalContactForm');
+            const btn = form.querySelector('button[type="submit"]');
+            const originalBtnText = btn.innerHTML;
 
-            const subject = encodeURIComponent(`Inquiry for ${service} Service - Skital`);
-            // Format body content securely
-            const body = encodeURIComponent(
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                `Service: ${service}\n\n` +
-                `Message:\n${message}`
-            );
+            // Set hidden subject
+            const service = document.getElementById('modalServiceName').innerText;
+            document.getElementById('modalFormSubject').value = `New Inquiry for ${service} - Skital Website`;
 
-            // Open user's email client
-            window.location.href = `mailto:contact@skital.com?subject=${subject}&body=${body}`;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            btn.style.opacity = '0.7';
 
-            // Close modal after a delay
-            setTimeout(() => {
-                closeModal();
-                alert('Thank you! Your email client has been opened with the inquiry details.');
-            }, 1000);
-
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        document.getElementById('modalSuccessMessage').style.display = 'block';
+                    } else {
+                        alert('Submission failed. Please try again.');
+                        btn.innerHTML = originalBtnText;
+                        btn.style.opacity = '1';
+                    }
+                })
+                .catch(error => {
+                    alert('Submission error. Check connection.');
+                    btn.innerHTML = originalBtnText;
+                    btn.style.opacity = '1';
+                });
             return false;
         }
 
@@ -1846,13 +1854,26 @@
                 <div id="modalServiceName" style="display: none;">Service</div>
             </div>
 
-            <form id="modalContactForm" onsubmit="return handleModalSubmit(event)">
+            <div id="modalSuccessMessage" style="display: none; text-align: center; padding: 20px;">
+                <div style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"><i
+                        class="fa-regular fa-circle-check"></i></div>
+                <h3 style="font-size: 2rem; margin-bottom: 10px; color: #1e293b;">Message Sent!</h3>
+                <p style="color: #64748b;">We will contact you shortly.</p>
+                <button class="primary-btn" onclick="closeModal()"
+                    style="margin-top: 20px; width: auto; padding: 10px 30px;">Close</button>
+            </div>
+
+            <form id="modalContactForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
+                onsubmit="return handleModalSubmit(event)">
+                <input type="hidden" name="_subject" id="modalFormSubject" value="New Inquiry">
+                <input type="hidden" name="_captcha" value="false">
+
                 <div class="form-group">
                     <label class="form-label" style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Name</label>
                     <div class="input-wrapper" style="position: relative;">
                         <i class="fa-regular fa-user input-icon"
                             style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
-                        <input type="text" id="modalName" class="form-control" placeholder="Full Name"
+                        <input type="text" name="name" id="modalName" class="form-control" placeholder="Full Name"
                             style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
                             required>
                     </div>
@@ -1864,7 +1885,8 @@
                     <div class="input-wrapper" style="position: relative;">
                         <i class="fa-regular fa-envelope input-icon"
                             style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
-                        <input type="email" id="modalEmail" class="form-control" placeholder="Email Address"
+                        <input type="email" name="email" id="modalEmail" class="form-control"
+                            placeholder="Email Address"
                             style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
                             required>
                     </div>
@@ -1876,7 +1898,7 @@
                     <div class="input-wrapper" style="position: relative;">
                         <i class="fa-regular fa-comment-dots input-icon"
                             style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
-                        <textarea id="modalMessage" class="form-control" rows="4"
+                        <textarea name="message" id="modalMessage" class="form-control" rows="4"
                             placeholder="Tell us about your needs..."
                             style="padding-left: 45px; padding-top: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; resize: none;"
                             required></textarea>

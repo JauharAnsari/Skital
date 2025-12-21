@@ -908,7 +908,7 @@
 
             .hero-title {
                 /* Reduced gap */
-                font-size: 1.5rem;
+                font-size: 2.2rem !important;
                 /* Smaller title for mobile */
                 white-space: nowrap;
                 /* Slightly smaller title to fit better */
@@ -1143,7 +1143,7 @@
             }
 
             .services-section {
-                padding-top: 5px !important;
+                padding-top: 30px !important;
                 margin-top: 0 !important;
             }
 
@@ -1447,10 +1447,10 @@
 
     <!-- CARPENTER HERO -->
     <section class="hero-section"
-        style="min-height: 50vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://loremflickr.com/1200/800/luxury,living,room,interior'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px;">
+        style="min-height: 50vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://foyr.com/learn/wp-content/uploads/2019/01/best-interior-design-tips.jpg'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px;">
         <div class="hero-content">
             <h1 class="hero-title"
-                style="color: white; -webkit-text-fill-color: white; font-size: 5rem; margin-bottom: 10px;">Interior
+                style="color: white; -webkit-text-fill-color: white; font-size: 3.5rem; margin-bottom: 10px;">Interior
                 Design
             </h1>
             <p
@@ -1460,13 +1460,13 @@
     </section>
 
     <!-- CARPENTER SERVICES -->
-    <div class="container section services-section" style="animation-delay: 0.2s; padding-top: 60px;">
+    <div class="container section services-section" style="animation-delay: 0.2s; padding-top: 100px;">
         <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             <!-- Wardrobe -->
             <div class="service-card"
                 style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden; margin-bottom: 20px;">
                 <div class="img-wrapper">
-                    <img src="https://loremflickr.com/800/600/false,ceiling,lights"
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.LWL9QZYQfBbpRSJ3yEnTuAHaDp?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
                         style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
                         onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
                         alt="Wardrobe">
@@ -1488,7 +1488,7 @@
             <div class="service-card"
                 style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
                 <div class="img-wrapper">
-                    <img src="https://loremflickr.com/800/600/wall,decor,wallpaper"
+                    <img src="https://ikiru.in/cdn/shop/products/buy-wall-art-urban-rectangular-abstract-metal-decoration-wall-art-hanging-for-living-room-by-handicrafts-town-on-ikiru-online-store-2_1075x1052.jpg?v=1724861168"
                         style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
                         onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
                         alt="Kitchen">
@@ -1510,7 +1510,7 @@
             <div class="service-card"
                 style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
                 <div class="img-wrapper">
-                    <img src="https://loremflickr.com/800/600/interior,wall,painting"
+                    <img src="https://i.pinimg.com/originals/75/df/68/75df68a9185c2ce05af7881790d01091.jpg"
                         style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
                         onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
                         alt="Door">
@@ -1533,10 +1533,10 @@
             <div class="service-card"
                 style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
                 <div class="img-wrapper">
-                    <img src="https://loremflickr.com/800/600/tv,unit,cabinet"
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.HmLowbLCZSf2qlXw_iVEhgHaF7?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
                         style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
                         onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                        alt="Repair">
+                        alt="Tiles">
                     <div class="hover-details">
                         <div class="detail-price">Visit Charge: ₹299</div>
                         <div class="detail-feat">
@@ -1546,10 +1546,8 @@
                     </div>
                 </div>
                 <div style="padding: 25px;">
-                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 5px;">Modular Units <span
-                            class="desktop-only-text">& Consoles</span></div>
-                    <p style="color: var(--text-gray); font-size: 1rem;">TV units, crockery units, and storage
-                        solutions.</p>
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 5px;">Tiles</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Premium wall and floor tiling solutions.</p>
                 </div>
             </div>
         </div>
@@ -1594,29 +1592,37 @@
 
         function handleModalSubmit(e) {
             e.preventDefault();
-            const name = document.getElementById('modalName').value;
-            const email = document.getElementById('modalEmail').value;
-            const message = document.getElementById('modalMessage').value;
-            const service = modalServiceName.innerText;
+            const form = document.getElementById('modalContactForm');
+            const btn = form.querySelector('button[type="submit"]');
+            const originalBtnText = btn.innerHTML;
 
-            const subject = encodeURIComponent(`Inquiry for ${service} Service - Skital`);
-            // Format body content securely
-            const body = encodeURIComponent(
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                `Service: ${service}\n\n` +
-                `Message:\n${message}`
-            );
+            // Set hidden subject
+            const service = document.getElementById('modalServiceName').innerText;
+            document.getElementById('modalFormSubject').value = `New Inquiry for ${service} - Skital Website`;
 
-            // Open user's email client
-            window.location.href = `mailto:contact@skital.com?subject=${subject}&body=${body}`;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            btn.style.opacity = '0.7';
 
-            // Close modal after a delay
-            setTimeout(() => {
-                closeModal();
-                alert('Thank you! Your email client has been opened with the inquiry details.');
-            }, 1000);
-
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        document.getElementById('modalSuccessMessage').style.display = 'block';
+                    } else {
+                        alert('Submission failed. Please try again.');
+                        btn.innerHTML = originalBtnText;
+                        btn.style.opacity = '1';
+                    }
+                })
+                .catch(error => {
+                    alert('Submission error. Check connection.');
+                    btn.innerHTML = originalBtnText;
+                    btn.style.opacity = '1';
+                });
             return false;
         }
 
@@ -1846,13 +1852,26 @@
                 <div id="modalServiceName" style="display: none;">Service</div>
             </div>
 
-            <form id="modalContactForm" onsubmit="return handleModalSubmit(event)">
+            <div id="modalSuccessMessage" style="display: none; text-align: center; padding: 20px;">
+                <div style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"><i
+                        class="fa-regular fa-circle-check"></i></div>
+                <h3 style="font-size: 2rem; margin-bottom: 10px; color: #1e293b;">Message Sent!</h3>
+                <p style="color: #64748b;">We will contact you shortly.</p>
+                <button class="primary-btn" onclick="closeModal()"
+                    style="margin-top: 20px; width: auto; padding: 10px 30px;">Close</button>
+            </div>
+
+            <form id="modalContactForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
+                onsubmit="return handleModalSubmit(event)">
+                <input type="hidden" name="_subject" id="modalFormSubject" value="New Inquiry">
+                <input type="hidden" name="_captcha" value="false">
+
                 <div class="form-group">
                     <label class="form-label" style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Name</label>
                     <div class="input-wrapper" style="position: relative;">
                         <i class="fa-regular fa-user input-icon"
                             style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
-                        <input type="text" id="modalName" class="form-control" placeholder="Full Name"
+                        <input type="text" name="name" id="modalName" class="form-control" placeholder="Full Name"
                             style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
                             required>
                     </div>
@@ -1864,7 +1883,8 @@
                     <div class="input-wrapper" style="position: relative;">
                         <i class="fa-regular fa-envelope input-icon"
                             style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
-                        <input type="email" id="modalEmail" class="form-control" placeholder="Email Address"
+                        <input type="email" name="email" id="modalEmail" class="form-control"
+                            placeholder="Email Address"
                             style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
                             required>
                     </div>
@@ -1876,7 +1896,7 @@
                     <div class="input-wrapper" style="position: relative;">
                         <i class="fa-regular fa-comment-dots input-icon"
                             style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
-                        <textarea id="modalMessage" class="form-control" rows="4"
+                        <textarea name="message" id="modalMessage" class="form-control" rows="4"
                             placeholder="Tell us about your needs..."
                             style="padding-left: 45px; padding-top: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; resize: none;"
                             required></textarea>
