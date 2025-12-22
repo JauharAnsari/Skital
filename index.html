@@ -1168,10 +1168,10 @@
                 box-shadow: none;
             }
 
-            /* Hide Static Contact Section on Mobile */
-            .contact-section-new {
+            /* Hide Static Contact Section on Mobile - REMOVED to show section */
+            /* .contact-section-new {
                 display: none;
-            }
+            } */
 
             /* Modal Styles */
             .contact-modal {
@@ -1395,7 +1395,7 @@
             <div class="pin-icon-top"><i class="fa-solid fa-location-dot"></i></div>
             <h2>Check Availability</h2>
             <p style="color: var(--text-gray); margin-bottom: 30px;">Enter your pincode to see if we serve your area
-                (Delhi Only)</p>
+                (Delhi & Gurgaon)</p>
             <div class="search-container">
                 <div class="input-wrapper">
                     <i class="fa-solid fa-magnifying-glass search-icon-input"></i>
@@ -1795,25 +1795,15 @@
         }
 
         // Modal Logic
+        // Modal Logic - REMOVED
         function handleContactClick(e) {
-            // Check if mobile (using same breakpoint as CSS 900px, roughly)
-            if (window.innerWidth <= 900) {
+            // Just let it scroll to the anchor
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
                 e.preventDefault();
-                document.getElementById('mobileContactModal').classList.add('active');
+                contactSection.scrollIntoView({ behavior: 'smooth' });
             }
-            // else let it scroll
         }
-
-        function closeModal() {
-            document.getElementById('mobileContactModal').classList.remove('active');
-        }
-
-        // Close modal on outside click
-        document.getElementById('mobileContactModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
     </script>
 
     <!-- CONTACT (Desktop Only via CSS hide) -->
@@ -1860,44 +1850,7 @@
         </div>
     </div>
 
-    <!-- Mobile Contact Modal -->
-    <div id="mobileContactModal" class="contact-modal">
-        <div class="container contact-form-container">
-            <button class="close-modal-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="form-header">
-                <h2>Get In Touch</h2>
-                <p>Ready to start your project? Let's talk.</p>
-            </div>
 
-            <!-- Duplicated form for specific mobile modal logic, or reused logic could be applied. 
-                 Using simple duplication for reliability in single file. -->
-            <form action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New Mobile Inquiry">
-                <input type="hidden" name="_captcha" value="false">
-
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <i class="fa-regular fa-user input-icon"></i>
-                    <input type="text" name="name" class="form-control" placeholder="Full Name" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <i class="fa-regular fa-envelope input-icon"></i>
-                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <i class="fa-regular fa-comment-dots input-icon"></i>
-                    <textarea name="message" class="form-control" placeholder="Tell us about your needs..."
-                        style="height: 150px; resize: vertical;" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Send Message <i class="fa-regular fa-paper-plane"></i></button>
-            </form>
-        </div>
-    </div>
 
     <!-- Whatsapp -->
     <a href="https://wa.me/919899942377?text=I%20want%20to%20Redesign%20my%20House" class="whatsapp-float"
@@ -1998,12 +1951,12 @@
 
             await new Promise(r => setTimeout(r, 1000));
 
-            if (pincode.startsWith('11')) {
+            if (pincode.startsWith('11') || pincode.startsWith('122')) {
                 statusBox.className = 'status-box status-success';
-                statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Available!</h4><p>We serve Delhi/New Delhi/Rohini</p></div>';
+                statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Available!</h4><p>We serve Delhi & Gurgaon</p></div>';
             } else {
-                statusBox.className = 'status-box status-error';
-                statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Not Available in this area.';
+                statusBox.className = 'status-box status-ready';
+                statusBox.innerHTML = '<i class="fa-solid fa-clock"></i><div><h4>Service Available Soon</h4><p>We are expanding rapidly!</p></div>';
             }
         }
 
