@@ -414,11 +414,15 @@
             margin-top: 30px;
             padding: 20px;
             border-radius: 12px;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             gap: 15px;
             font-weight: 500;
+        }
+        
+        .status-box.show {
+            display: flex;
         }
 
         .status-ready {
@@ -1246,6 +1250,11 @@
                 line-height: normal;
                 /* Reset line height */
                 justify-content: center !important;
+                position: relative;
+                z-index: 10;
+                pointer-events: auto !important;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
             }
 
             /* Hide Text "Check" in button, keep icon */
@@ -1289,6 +1298,23 @@
 
             .status-box {
                 display: none !important;
+                margin-top: 15px;
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .status-box.show {
+                display: flex !important;
+            }
+            
+            .status-box h4 {
+                font-size: 1rem;
+                margin: 0 0 5px 0;
+            }
+            
+            .status-box p {
+                font-size: 0.85rem;
+                margin: 0;
             }
 
             /* Services Grid Gap */
@@ -1402,11 +1428,9 @@
                     <input type="text" id="pincodeInput" class="pincode-input" placeholder="Enter 6-digit pincode"
                         maxlength="6" oninput="updateStatusBox(this.value)">
                 </div>
-                <button class="go-btn" onclick="checkPincode()">Check <i class="fa-solid fa-arrow-right"></i></button>
+                <button class="go-btn" onclick="checkPincode()" type="button">Check <i class="fa-solid fa-arrow-right"></i></button>
             </div>
-            <div id="statusBox" class="status-box status-ready">
-                <i class="fa-solid fa-magnifying-glass"></i> Ready to search!
-            </div>
+            <div id="statusBox" class="status-box"></div>
         </div>
     </div>
 
@@ -1923,46 +1947,75 @@
         }
 
         // Pincode
+        // Pincode - Hide status box while typing
         function updateStatusBox(val) {
-            if (!val) {
-                statusBox.className = 'status-box status-ready';
-                statusBox.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Ready to search!';
-            } else if (val.length < 6) {
-                statusBox.className = 'status-box status-warning';
-                statusBox.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Digits remaining: ' + (6 - val.length);
-            } else {
-                statusBox.className = 'status-box status-ready';
-                statusBox.innerHTML = '<i class="fa-solid fa-check"></i> Ready to check.';
-            }
+            // Hide status box while user is typing
+            statusBox.classList.remove('show');
         }
 
         async function checkPincode() {
             const input = document.getElementById('pincodeInput');
             const pincode = input.value.trim();
 
+            // Show status box when search button is clicked
+            statusBox.classList.add('show');
+
             if (pincode.length !== 6 || isNaN(pincode)) {
-                statusBox.className = 'status-box status-error';
+                statusBox.className = 'status-box status-error show';
                 statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid Pincode';
                 return;
             }
 
-            statusBox.className = 'status-box status-ready';
+            statusBox.className = 'status-box status-ready show';
             statusBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
 
             await new Promise(r => setTimeout(r, 1000));
 
-            if (pincode.startsWith('11')) {
-                statusBox.className = 'status-box status-success';
-                statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Available!</h4><p>We serve Delhi/New Delhi/Rohini</p></div>';
+            // Delhi pincodes: 110001-110099 (starts with 110)
+            // Gurgaon pincodes: 122001-122099 (starts with 122)
+            if (pincode.startsWith('110') || pincode.startsWith('122')) {
+                statusBox.className = 'status-box status-success show';
+                statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Service is Available</h4><p>We serve your area in Delhi & Gurgaon</p></div>';
             } else {
-                statusBox.className = 'status-box status-error';
-                statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Not Available in this area.';
+                statusBox.className = 'status-box status-ready show';
+                statusBox.innerHTML = '<i class="fa-solid fa-clock"></i><div><h4>Service Available Soon</h4><p>We are expanding rapidly!</p></div>';
             }
         }
 
         document.getElementById('pincodeInput').addEventListener('keypress', e => {
             if (e.key === 'Enter') checkPincode();
         });
+
+        // Ensure button works on mobile devices
+        (function() {
+            const goBtn = document.querySelector('.go-btn');
+            if (goBtn) {
+                // Add click event listener for better mobile support
+                goBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkPincode();
+                    return false;
+                }, true);
+                
+                // Handle touch events for mobile devices
+                let touchStartTime = 0;
+                goBtn.addEventListener('touchstart', function(e) {
+                    touchStartTime = Date.now();
+                }, { passive: true });
+                
+                goBtn.addEventListener('touchend', function(e) {
+                    const touchDuration = Date.now() - touchStartTime;
+                    // Only trigger if it's a quick tap (not a swipe)
+                    if (touchDuration < 300) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        checkPincode();
+                        return false;
+                    }
+                }, { passive: false });
+            }
+        })();
 
         // 3D TILT EFFECT (Re-added)
         document.querySelectorAll('.stat-card, .service-card, .pincode-card, .img-wrapper').forEach(card => {
