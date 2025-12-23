@@ -899,12 +899,12 @@
 
             header .container {
                 padding: 0 15px !important;
-                /* Minimal padding for absolute corners */
+                /* Minimal padding for absolute corners */  
                 width: 100% !important;
                 max-width: 100% !important;
             }
 
-            /* Reduced gap */
+            /* Reduced gap */  
             .hero-section {
                 padding-top: 10px;
                 /* Since header is floating, we might need to check spacing. */
@@ -1395,7 +1395,7 @@
             <div class="pin-icon-top"><i class="fa-solid fa-location-dot"></i></div>
             <h2>Check Availability</h2>
             <p style="color: var(--text-gray); margin-bottom: 30px;">Enter your pincode to see if we serve your area
-                (Delhi & Gurgaon)</p>
+                (Delhi Only)</p>
             <div class="search-container">
                 <div class="input-wrapper">
                     <i class="fa-solid fa-magnifying-glass search-icon-input"></i>
@@ -1951,12 +1951,12 @@
 
             await new Promise(r => setTimeout(r, 1000));
 
-            if (pincode.startsWith('11') || pincode.startsWith('122')) {
+            if (pincode.startsWith('11')) {
                 statusBox.className = 'status-box status-success';
-                statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Available!</h4><p>We serve Delhi & Gurgaon</p></div>';
+                statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Available!</h4><p>We serve Delhi/New Delhi/Rohini</p></div>';
             } else {
-                statusBox.className = 'status-box status-ready';
-                statusBox.innerHTML = '<i class="fa-solid fa-clock"></i><div><h4>Service Available Soon</h4><p>We are expanding rapidly!</p></div>';
+                statusBox.className = 'status-box status-error';
+                statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Not Available in this area.';
             }
         }
 
