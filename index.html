@@ -420,7 +420,7 @@
             gap: 15px;
             font-weight: 500;
         }
-        
+
         .status-box.show {
             display: flex;
         }
@@ -903,12 +903,12 @@
 
             header .container {
                 padding: 0 15px !important;
-                /* Minimal padding for absolute corners */  
+                /* Minimal padding for absolute corners */
                 width: 100% !important;
                 max-width: 100% !important;
             }
 
-            /* Reduced gap */  
+            /* Reduced gap */
             .hero-section {
                 padding-top: 10px;
                 /* Since header is floating, we might need to check spacing. */
@@ -1302,16 +1302,16 @@
                 padding: 15px;
                 font-size: 0.9rem;
             }
-            
+
             .status-box.show {
                 display: flex !important;
             }
-            
+
             .status-box h4 {
                 font-size: 1rem;
                 margin: 0 0 5px 0;
             }
-            
+
             .status-box p {
                 font-size: 0.85rem;
                 margin: 0;
@@ -1352,6 +1352,127 @@
 
         .whatsapp-float:hover {
             transform: scale(1.1);
+        }
+
+        /* SERVICE MODAL (Global) */
+        .service-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .service-modal .modal-content {
+            background: #ffffff;
+            /* White background */
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: modalSlideUp 0.3s ease;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #eff6ff 0%, #f1f5f9 100%);
+            padding: 25px 30px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .close-modal-btn {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-gray);
+            transition: all 0.2s;
+        }
+
+        .close-modal-btn:hover {
+            background: white;
+            color: var(--text-dark);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal-form .form-label {
+            font-size: 0.95rem;
+            color: #475569;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .modal-form .form-control {
+            background: #f8fafc !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 12px;
+            padding: 14px 14px 14px 45px;
+            font-size: 1rem;
+            color: #1e293b !important;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .modal-form .form-control:focus {
+            background: white !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .modal-form .submit-btn {
+            width: 100%;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -1428,7 +1549,8 @@
                     <input type="text" id="pincodeInput" class="pincode-input" placeholder="Enter 6-digit pincode"
                         maxlength="6" oninput="updateStatusBox(this.value)">
                 </div>
-                <button class="go-btn" onclick="checkPincode()" type="button">Check <i class="fa-solid fa-arrow-right"></i></button>
+                <button class="go-btn" onclick="checkPincode()" type="button">Check <i
+                        class="fa-solid fa-arrow-right"></i></button>
             </div>
             <div id="statusBox" class="status-box"></div>
         </div>
@@ -1451,15 +1573,15 @@
                 <div class="service-icon-circle"><i class="fa-solid fa-scissors"></i></div>
                 <div class="service-text">Fabricator</div>
             </div>
-            <div class="service-card" onclick="location.href='civil-work.html'">
+            <div class="service-card" onclick="openServiceModal('Civil Work')">
                 <div class="service-icon-circle"><i class="fa-solid fa-helmet-safety"></i></div>
                 <div class="service-text">Civil Work</div>
             </div>
-            <div class="service-card" onclick="location.href='interior.html'">
+            <div class="service-card" onclick="openServiceModal('Interior')">
                 <div class="service-icon-circle"><i class="fa-solid fa-couch"></i></div>
                 <div class="service-text">Interior</div>
             </div>
-            <div class="service-card" onclick="location.href='flooring.html'">
+            <div class="service-card" onclick="openServiceModal('Flooring')">
                 <div class="service-icon-circle"><i class="fa-solid fa-layer-group"></i></div>
                 <div class="service-text">Flooring</div>
             </div>
@@ -1857,9 +1979,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <i class="fa-regular fa-envelope input-icon"></i>
-                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                    <label class="form-label">Phone Number</label>
+                    <i class="fa-solid fa-phone input-icon"></i>
+                    <input type="tel" name="phone" class="form-control" placeholder="10-digit Mobile Number"
+                        pattern="[0-9]{10}" title="Please enter a valid 10-digit number" required>
                 </div>
 
                 <div class="form-group">
@@ -1875,6 +1998,58 @@
     </div>
 
 
+
+    <!-- Service Modal -->
+    <div id="serviceModal" class="service-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalServiceTitle">Get in Touch</h3>
+                <button class="close-modal-btn" onclick="closeServiceModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="serviceSuccessMessage" style="display: none; text-align: center; padding: 20px;">
+                    <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--text-dark);">Request Sent!</h4>
+                    <p style="color: var(--text-gray);">We will call you shortly.</p>
+                    <button onclick="closeServiceModal()" class="secondary-btn"
+                        style="margin-top: 20px; padding: 10px 30px; font-size: 0.9rem;">Close</button>
+                </div>
+
+                <form id="serviceForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
+                    class="modal-form" onsubmit="handleServiceFormSubmit(event)">
+                    <input type="hidden" name="_subject" id="modalSubject" value="New Service Inquiry">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <i class="fa-regular fa-user input-icon" style="top: 43px;"></i>
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <i class="fa-solid fa-phone input-icon" style="top: 43px;"></i>
+                        <input type="tel" name="phone" class="form-control" placeholder="10-digit Mobile Number"
+                            pattern="[0-9]{10}" title="Please enter a valid 10-digit number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <i class="fa-regular fa-comment-dots input-icon" style="top: 43px;"></i>
+                        <textarea name="message" class="form-control" placeholder="Details about your requirement..."
+                            style="height: 100px; resize: vertical;" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message <i
+                            class="fa-solid fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Whatsapp -->
     <a href="https://wa.me/919899942377?text=I%20want%20to%20Redesign%20my%20House" class="whatsapp-float"
@@ -1987,24 +2162,24 @@
         });
 
         // Ensure button works on mobile devices
-        (function() {
+        (function () {
             const goBtn = document.querySelector('.go-btn');
             if (goBtn) {
                 // Add click event listener for better mobile support
-                goBtn.addEventListener('click', function(e) {
+                goBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     e.stopPropagation();
                     checkPincode();
                     return false;
                 }, true);
-                
+
                 // Handle touch events for mobile devices
                 let touchStartTime = 0;
-                goBtn.addEventListener('touchstart', function(e) {
+                goBtn.addEventListener('touchstart', function (e) {
                     touchStartTime = Date.now();
                 }, { passive: true });
-                
-                goBtn.addEventListener('touchend', function(e) {
+
+                goBtn.addEventListener('touchend', function (e) {
                     const touchDuration = Date.now() - touchStartTime;
                     // Only trigger if it's a quick tap (not a swipe)
                     if (touchDuration < 300) {
@@ -2104,6 +2279,71 @@
                 desc.style.opacity = 1;
                 img.style.opacity = 1;
             }, 200);
+        }
+
+        // Service Modal Logic
+        const serviceModal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalServiceTitle');
+        const modalSubject = document.getElementById('modalSubject');
+        const serviceForm = document.getElementById('serviceForm');
+        const serviceSuccess = document.getElementById('serviceSuccessMessage');
+
+        function openServiceModal(serviceName) {
+            modalTitle.innerText = serviceName + ' Inquiry';
+            modalSubject.value = 'New Inquiry for: ' + serviceName;
+
+            // Reset form
+            serviceForm.style.display = 'block';
+            serviceSuccess.style.display = 'none';
+            serviceForm.reset();
+
+            // Show Modal
+            serviceModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+
+        function closeServiceModal() {
+            serviceModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
+        }
+
+        // Close on background click
+        serviceModal.addEventListener('click', (e) => {
+            if (e.target === serviceModal) {
+                closeServiceModal();
+            }
+        });
+
+        function handleServiceFormSubmit(e) {
+            e.preventDefault();
+            const form = serviceForm;
+            const btn = form.querySelector('.submit-btn');
+            const originalBtnHtml = btn.innerHTML;
+
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            btn.style.opacity = '0.7';
+
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        serviceSuccess.style.display = 'block';
+                    } else {
+                        alert('Submission failed. Please try again.');
+                        btn.innerHTML = originalBtnHtml;
+                        btn.style.opacity = '1';
+                    }
+                })
+                .catch(error => {
+                    alert('Submission error. Check connection.');
+                    btn.innerHTML = originalBtnHtml;
+                    btn.style.opacity = '1';
+                });
+            return false;
         }
     </script>
 </body>

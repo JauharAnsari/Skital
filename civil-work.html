@@ -1398,44 +1398,185 @@
             pointer-events: all;
         }
 
-        .modal-content {
-            background: #ffffff;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 24px;
-            padding: 40px;
-            position: relative;
-            transform: translateY(30px);
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        /* SERVICE MODAL (Global - Matches index.html) */
+        .service-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .modal-overlay.active .modal-content {
-            transform: translateY(0);
+        .service-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .service-modal .modal-content {
+            background: #ffffff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: modalSlideUp 0.3s ease;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 0;
+            /* Reset padding as header/body handle it */
+            transform: none;
+            /* Reset distinct transform */
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #eff6ff 0%, #f1f5f9 100%);
+            padding: 25px 30px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin: 0;
         }
 
         .close-modal-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #f1f5f9;
-            border: none;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             width: 36px;
             height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #64748b;
             cursor: pointer;
+            color: var(--text-gray);
             transition: all 0.2s;
-            font-size: 1rem;
+            position: static;
+            /* Reset absolute positioning */
         }
 
         .close-modal-btn:hover {
-            background: #fee2e2;
-            color: #ef4444;
+            background: white;
+            color: var(--text-dark);
             transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal-form .form-label {
+            font-size: 0.95rem;
+            color: #475569;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .modal-form .form-control {
+            background: #f8fafc !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 12px;
+            padding: 14px 14px 14px 45px;
+            font-size: 1rem;
+            color: #1e293b !important;
+            transition: all 0.2s;
+            width: 100%;
+            height: auto;
+            box-shadow: none;
+        }
+
+        .modal-form .form-control:focus {
+            background: white !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+            outline: none;
+        }
+
+        .modal-form .submit-btn {
+            width: 100%;
+            margin-top: 10px;
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 800;
+            padding: 16px;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Mobile Responsiveness for Modal */
+        @media (max-width: 768px) {
+            .service-modal {
+                align-items: flex-end;
+                /* Bottom sheet feel on very small screens, or center */
+                padding: 10px;
+            }
+
+            .service-modal .modal-content {
+                width: 100%;
+                max-width: 100%;
+                border-radius: 24px;
+                margin-bottom: 0;
+            }
+
+            .modal-header {
+                padding: 20px 20px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .modal-form .form-group {
+                margin-bottom: 15px;
+            }
+
+            .modal-form .form-control {
+                padding: 12px 12px 12px 40px;
+                font-size: 0.95rem;
+            }
+
+            .input-icon {
+                top: 44px !important;
+                /* Adjust icon position for smaller input */
+                left: 15px !important;
+            }
         }
     </style>
 </head>
@@ -1562,45 +1703,33 @@
         target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
     <script>
-        // MODAL LOGIC
-        const modal = document.getElementById('contactModal');
-        const modalServiceName = document.getElementById('modalServiceName');
-        const modalMessage = document.getElementById('modalMessage');
+        // Service Modal Logic (Updated for Phone)
+        let serviceModal, modalTitle, modalSubject, serviceForm, serviceSuccess;
 
-        function openModal(serviceName) {
-            modalServiceName.innerText = serviceName;
-            // Pre-fill message with context
-            modalMessage.value = `Hi, I am interested in your ${serviceName} services. Please contact me back.`;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        function openServiceModal(serviceName) {
+            modalTitle.innerText = serviceName + ' Inquiry';
+            modalSubject.value = 'New Inquiry for: ' + serviceName;
+
+            // Reset form
+            serviceForm.style.display = 'block';
+            serviceSuccess.style.display = 'none';
+            serviceForm.reset();
+
+            // Show Modal
+            serviceModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
         }
 
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
+        function closeServiceModal() {
+            serviceModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
         }
 
-        // Close on clicking overlay
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-        // Handle Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal();
-            }
-        });
-
-        function handleModalSubmit(e) {
+        function handleServiceFormSubmit(e) {
             e.preventDefault();
-            const form = document.getElementById('modalContactForm');
-            const btn = form.querySelector('button[type="submit"]');
-            const originalBtnText = btn.innerHTML;
-
-            // Set hidden subject
-            const service = document.getElementById('modalServiceName').innerText;
-            document.getElementById('modalFormSubject').value = `New Inquiry for ${service} - Skital Website`;
+            const form = serviceForm;
+            const btn = form.querySelector('.submit-btn');
+            const originalBtnHtml = btn.innerHTML;
 
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
             btn.style.opacity = '0.7';
@@ -1613,33 +1742,43 @@
                 .then(response => {
                     if (response.ok) {
                         form.style.display = 'none';
-                        document.getElementById('modalSuccessMessage').style.display = 'block';
+                        serviceSuccess.style.display = 'block';
                     } else {
                         alert('Submission failed. Please try again.');
-                        btn.innerHTML = originalBtnText;
+                        btn.innerHTML = originalBtnHtml;
                         btn.style.opacity = '1';
                     }
                 })
                 .catch(error => {
                     alert('Submission error. Check connection.');
-                    btn.innerHTML = originalBtnText;
+                    btn.innerHTML = originalBtnHtml;
                     btn.style.opacity = '1';
                 });
             return false;
         }
 
-        // Attach click listeners to service cards
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize DOM elements
+            serviceModal = document.getElementById('serviceModal');
+            modalTitle = document.getElementById('modalServiceTitle');
+            modalSubject = document.getElementById('modalSubject');
+            serviceForm = document.getElementById('serviceForm');
+            serviceSuccess = document.getElementById('serviceSuccessMessage');
+
+            // Close on background click
+            serviceModal.addEventListener('click', (e) => {
+                if (e.target === serviceModal) {
+                    closeServiceModal();
+                }
+            });
+
+            // Attach click listeners to service cards
             document.querySelectorAll('.service-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    // Check if clicked element is NOT a button or link (if any exist inside card)
-                    // In this design, the whole card is clickable.
-                    // We need to extract the text. The logic depends on card structure.
-                    // Looking at HTML, there is .service-text element
                     const titleElement = card.querySelector('.service-text');
                     if (titleElement) {
                         const title = titleElement.innerText.trim();
-                        openModal(title);
+                        openServiceModal(title);
                     }
                 });
             });
@@ -1841,75 +1980,56 @@
             }, 200);
         }
     </script>
-    <!-- CONTACT MODAL -->
-    <div class="modal-overlay" id="contactModal">
+    <!-- Service Modal (Updated for Phone) -->
+    <div id="serviceModal" class="service-modal">
         <div class="modal-content">
-            <button class="close-modal-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-
-            <div style="text-align: center; margin-bottom: 30px;">
-                <h3 style="font-size: 2.2rem; font-weight: 800; color: #1e293b; margin-bottom: 10px;">Get In Touch
-                </h3>
-                <p style="color: #64748b;">Ready to start your project? Let's talk.</p>
-                <!-- Hidden service indicator for context -->
-                <div id="modalServiceName" style="display: none;">Service</div>
-            </div>
-
-            <div id="modalSuccessMessage" style="display: none; text-align: center; padding: 20px;">
-                <div style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"><i
-                        class="fa-regular fa-circle-check"></i></div>
-                <h3 style="font-size: 2rem; margin-bottom: 10px; color: #1e293b;">Message Sent!</h3>
-                <p style="color: #64748b;">We will contact you shortly.</p>
-                <button class="primary-btn" onclick="closeModal()"
-                    style="margin-top: 20px; width: auto; padding: 10px 30px;">Close</button>
-            </div>
-
-            <form id="modalContactForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
-                onsubmit="return handleModalSubmit(event)">
-                <input type="hidden" name="_subject" id="modalFormSubject" value="New Inquiry">
-                <input type="hidden" name="_captcha" value="false">
-
-                <div class="form-group">
-                    <label class="form-label" style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Name</label>
-                    <div class="input-wrapper" style="position: relative;">
-                        <i class="fa-regular fa-user input-icon"
-                            style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
-                        <input type="text" name="name" id="modalName" class="form-control" placeholder="Full Name"
-                            style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
-                            required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label"
-                        style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Email</label>
-                    <div class="input-wrapper" style="position: relative;">
-                        <i class="fa-regular fa-envelope input-icon"
-                            style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
-                        <input type="email" name="email" id="modalEmail" class="form-control"
-                            placeholder="Email Address"
-                            style="padding-left: 45px; background: #f8fafc; border: 1px solid #e2e8f0; height: 50px; border-radius: 12px;"
-                            required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label"
-                        style="color: #64748b; font-weight: 600; margin-bottom: 8px;">Message</label>
-                    <div class="input-wrapper" style="position: relative;">
-                        <i class="fa-regular fa-comment-dots input-icon"
-                            style="position: absolute; left: 15px; top: 15px; color: #94a3b8;"></i>
-                        <textarea name="message" id="modalMessage" class="form-control" rows="4"
-                            placeholder="Tell us about your needs..."
-                            style="padding-left: 45px; padding-top: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; resize: none;"
-                            required></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="primary-btn"
-                    style="width: 100%; justify-content: center; margin-top: 10px; background: #3b82f6;">
-                    Send Message <i class="fa-regular fa-paper-plane" style="margin-left: 8px;"></i>
+            <div class="modal-header">
+                <h3 id="modalServiceTitle">Get in Touch</h3>
+                <button class="close-modal-btn" onclick="closeServiceModal()">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
-            </form>
+            </div>
+            <div class="modal-body">
+                <div id="serviceSuccessMessage" style="display: none; text-align: center; padding: 20px;">
+                    <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--text-dark);">Request Sent!</h4>
+                    <p style="color: var(--text-gray);">We will call you shortly.</p>
+                    <button onclick="closeServiceModal()" class="secondary-btn"
+                        style="margin-top: 20px; padding: 10px 30px; font-size: 0.9rem;">Close</button>
+                </div>
+
+                <form id="serviceForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
+                    class="modal-form" onsubmit="handleServiceFormSubmit(event)">
+                    <input type="hidden" name="_subject" id="modalSubject" value="New Service Inquiry">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <i class="fa-regular fa-user input-icon" style="position: absolute; left: 18px; top: 46px;"></i>
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <i class="fa-solid fa-phone input-icon" style="position: absolute; left: 18px; top: 46px;"></i>
+                        <input type="tel" name="phone" class="form-control" placeholder="10-digit Mobile Number"
+                            pattern="[0-9]{10}" title="Please enter a valid 10-digit number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <i class="fa-regular fa-comment-dots input-icon"
+                            style="position: absolute; left: 18px; top: 46px;"></i>
+                        <textarea name="message" class="form-control" placeholder="Details about your requirement..."
+                            style="height: 100px; resize: vertical;" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message <i
+                            class="fa-solid fa-arrow-right"></i></button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
