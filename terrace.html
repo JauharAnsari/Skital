@@ -467,7 +467,8 @@
         }
 
         .service-card {
-            background: var(--surface-color);
+            background: rgba(240, 249, 255, 0.9);
+            /* Light Blue Tint */
             backdrop-filter: blur(15px);
             padding: 40px 25px;
             border-radius: 24px;
@@ -1601,99 +1602,96 @@
     </section>
 
     <!-- CARPENTER SERVICES -->
-    <div class="container section services-section" style="animation-delay: 0.2s; padding-top: 60px;">
-        <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-            <!-- Wardrobe -->
-            <div class="service-card"
-                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden; margin-bottom: 20px;">
-                <div class="img-wrapper">
-                    <img src="https://loremflickr.com/800/600/roof,waterproofing,construction"
-                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                        alt="Wardrobe">
-                    <div class="hover-details">
-                        <div class="detail-price">Starts @ ₹950/sq.ft</div>
-                        <div class="detail-feat">
-                            <i class="fa-solid fa-check"></i> 10-Year Warranty<br>
-                            <i class="fa-solid fa-check"></i> Custom Internal Layouts
-                        </div>
+    <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <!-- Horticulture -->
+        <div class="service-card"
+            style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="img-wrapper">
+                <img src="https://loremflickr.com/800/600/horticulture,garden,plants"
+                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                    alt="Horticulture">
+                <div class="hover-details">
+                    <div class="detail-price">Starts @ ₹450/sq.ft</div>
+                    <div class="detail-feat">
+                        <i class="fa-solid fa-check"></i> Organic Maintenance<br>
+                        <i class="fa-solid fa-check"></i> Seasonal Designs
                     </div>
-                </div>
-                <div style="padding: 25px;">
-                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Waterproofing</div>
-                    <p style="color: var(--text-gray); font-size: 1rem;">Complete rooftop waterproofing solutions with
-                        guarantee.</p>
                 </div>
             </div>
-
-            <!-- Kitchen -->
-            <div class="service-card"
-                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
-                <div class="img-wrapper">
-                    <img src="https://loremflickr.com/800/600/potted,plants,terrace"
-                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                        alt="Kitchen">
-                    <div class="hover-details">
-                        <div class="detail-price">Starts @ ₹1,400/sq.ft</div>
-                        <div class="detail-feat">
-                            <i class="fa-solid fa-check"></i> Waterproof Marine Ply<br>
-                            <i class="fa-solid fa-check"></i> Soft-Close Hettich Hinges
-                        </div>
-                    </div>
-                </div>
-                <div style="padding: 25px;">
-                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Gardening</div>
-                    <p style="color: var(--text-gray); font-size: 1rem;">Vertical gardens and rooftop landscaping.</p>
-                </div>
-            </div>
-
-            <!-- Door -->
-            <div class="service-card"
-                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
-                <div class="img-wrapper">
-                    <img src="https://loremflickr.com/800/600/outdoor,furniture,patio"
-                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                        alt="Door">
-                    <div class="hover-details">
-                        <div class="detail-price">Starts @ ₹8,500/unit</div>
-                        <div class="detail-feat">
-                            <i class="fa-solid fa-check"></i> Solid Teak Wood<br>
-                            <i class="fa-solid fa-check"></i> Weather-Proof Polish
-                        </div>
-                    </div>
-                </div>
-                <div style="padding: 25px;">
-                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Sitting Area</div>
-                    <p style="color: var(--text-gray); font-size: 1rem;">Cozy gazebos and outdoor seating arrangements.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Repair & Maintenance -->
-            <div class="service-card"
-                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
-                <div class="img-wrapper">
-                    <img src="https://loremflickr.com/800/600/pergola,garden,wood"
-                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                        alt="Repair">
-                    <div class="hover-details">
-                        <div class="detail-price">Visit Charge: ₹299</div>
-                        <div class="detail-feat">
-                            <i class="fa-solid fa-check"></i> 2-Hour Response Time<br>
-                            <i class="fa-solid fa-check"></i> 30-Day Service Guarantee
-                        </div>
-                    </div>
-                </div>
-                <div style="padding: 25px;">
-                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 5px;">Pergola <span
-                            class="desktop-only-text">& Shades</span></div>
-                    <p style="color: var(--text-gray); font-size: 1rem;">Stylish pergolas for shade and aesthetics.</p>
-                </div>
+            <div style="padding: 25px;">
+                <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Horticulture</div>
+                <p style="color: var(--text-gray); font-size: 1rem;">Beautiful landscape design and plant care.</p>
             </div>
         </div>
+
+        <!-- Waterproofing -->
+        <div class="service-card"
+            style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="img-wrapper">
+                <img src="https://loremflickr.com/800/600/roof,waterproofing,construction"
+                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                    alt="Waterproofing">
+                <div class="hover-details">
+                    <div class="detail-price">Starts @ ₹950/sq.ft</div>
+                    <div class="detail-feat">
+                        <i class="fa-solid fa-check"></i> 10-Year Warranty<br>
+                        <i class="fa-solid fa-check"></i> Leakage Proofing
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 25px;">
+                <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Waterproofing</div>
+                <p style="color: var(--text-gray); font-size: 1rem;">Complete rooftop waterproofing solutions with
+                    guarantee.</p>
+            </div>
+        </div>
+
+        <!-- Pergola/Porta cabin -->
+        <div class="service-card"
+            style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="img-wrapper">
+                <img src="https://loremflickr.com/800/600/pergola,gazebo,cabin"
+                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                    alt="Pergola/Porta cabin">
+                <div class="hover-details">
+                    <div class="detail-price">Starts @ ₹1,200/sq.ft</div>
+                    <div class="detail-feat">
+                        <i class="fa-solid fa-check"></i> Weather Resistant<br>
+                        <i class="fa-solid fa-check"></i> Modern Designs
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 25px;">
+                <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Pergola/Porta cabin</div>
+                <p style="color: var(--text-gray); font-size: 1rem;">Stylish pergolas and functional porta cabins.</p>
+            </div>
+        </div>
+
+        <!-- Flooring -->
+        <div class="service-card"
+            style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="img-wrapper">
+                <img src="https://loremflickr.com/800/600/terrace,flooring,tiles"
+                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                    alt="Flooring">
+                <div class="hover-details">
+                    <div class="detail-price">Starts @ ₹150/sq.ft</div>
+                    <div class="detail-feat">
+                        <i class="fa-solid fa-check"></i> Anti-Skid Tiles<br>
+                        <i class="fa-solid fa-check"></i> Durable Material
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 25px;">
+                <div class="service-text" style="font-size: 1.8rem; margin-bottom: 5px;">Flooring</div>
+                <p style="color: var(--text-gray); font-size: 1rem;">Premium terrace flooring options.</p>
+            </div>
+        </div>
+    </div>
     </div>
 
     <!-- CONTACT REMOVED -->
