@@ -1309,9 +1309,9 @@
         }
 
         .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
+            position: fixed !important;
+            bottom: 30px !important;
+            right: 30px !important;
             background: #25D366;
             color: white;
             width: 60px;
@@ -1323,7 +1323,7 @@
             font-size: 35px;
             box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
             text-decoration: none;
-            z-index: 1000;
+            z-index: 9999 !important;
             transition: all 0.3s ease;
         }
 
@@ -1676,345 +1676,342 @@
             </div>
         </div>
 
-        <!-- CONTACT REMOVED -->
+    </div>
+    </div>
 
-        <!-- Whatsapp -->
-        <a href="https://wa.me/919899942377?text=I%20want%20to%20Redesign%20my%20House" class="whatsapp-float"
-            target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+    <script>
+        // Service Modal Logic (Updated for Phone)
+        let serviceModal, modalTitle, modalSubject, serviceForm, serviceSuccess;
 
-        <script>
-            // Service Modal Logic (Updated for Phone)
-            let serviceModal, modalTitle, modalSubject, serviceForm, serviceSuccess;
+        function openServiceModal(serviceName) {
+            modalTitle.innerText = serviceName + ' Inquiry';
+            modalSubject.value = 'New Inquiry for: ' + serviceName;
 
-            function openServiceModal(serviceName) {
-                modalTitle.innerText = serviceName + ' Inquiry';
-                modalSubject.value = 'New Inquiry for: ' + serviceName;
+            // Reset form
+            serviceForm.style.display = 'block';
+            serviceSuccess.style.display = 'none';
+            serviceForm.reset();
 
-                // Reset form
-                serviceForm.style.display = 'block';
-                serviceSuccess.style.display = 'none';
-                serviceForm.reset();
+            // Show Modal
+            serviceModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
 
-                // Show Modal
-                serviceModal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent background scroll
-            }
+        function closeServiceModal() {
+            serviceModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
+        }
 
-            function closeServiceModal() {
-                serviceModal.classList.remove('active');
-                document.body.style.overflow = ''; // Restore scroll
-            }
+        function handleServiceFormSubmit(e) {
+            e.preventDefault();
+            const form = serviceForm;
+            const btn = form.querySelector('.submit-btn');
+            const originalBtnHtml = btn.innerHTML;
 
-            function handleServiceFormSubmit(e) {
-                e.preventDefault();
-                const form = serviceForm;
-                const btn = form.querySelector('.submit-btn');
-                const originalBtnHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            btn.style.opacity = '0.7';
 
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-                btn.style.opacity = '0.7';
-
-                fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            form.style.display = 'none';
-                            serviceSuccess.style.display = 'block';
-                        } else {
-                            alert('Submission failed. Please try again.');
-                            btn.innerHTML = originalBtnHtml;
-                            btn.style.opacity = '1';
-                        }
-                    })
-                    .catch(error => {
-                        alert('Submission error. Check connection.');
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        serviceSuccess.style.display = 'block';
+                    } else {
+                        alert('Submission failed. Please try again.');
                         btn.innerHTML = originalBtnHtml;
                         btn.style.opacity = '1';
-                    });
-                return false;
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                // Initialize DOM elements
-                serviceModal = document.getElementById('serviceModal');
-                modalTitle = document.getElementById('modalServiceTitle');
-                modalSubject = document.getElementById('modalSubject');
-                serviceForm = document.getElementById('serviceForm');
-                serviceSuccess = document.getElementById('serviceSuccessMessage');
-
-                // Close on background click
-                serviceModal.addEventListener('click', (e) => {
-                    if (e.target === serviceModal) {
-                        closeServiceModal();
                     }
+                })
+                .catch(error => {
+                    alert('Submission error. Check connection.');
+                    btn.innerHTML = originalBtnHtml;
+                    btn.style.opacity = '1';
                 });
+            return false;
+        }
 
-                // Attach click listeners to service cards
-                document.querySelectorAll('.service-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const titleElement = card.querySelector('.service-text');
-                        if (titleElement) {
-                            const title = titleElement.innerText.trim();
-                            openServiceModal(title);
-                        }
-                    });
-                });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize DOM elements
+            serviceModal = document.getElementById('serviceModal');
+            modalTitle = document.getElementById('modalServiceTitle');
+            modalSubject = document.getElementById('modalSubject');
+            serviceForm = document.getElementById('serviceForm');
+            serviceSuccess = document.getElementById('serviceSuccessMessage');
+
+            // Close on background click
+            serviceModal.addEventListener('click', (e) => {
+                if (e.target === serviceModal) {
+                    closeServiceModal();
+                }
             });
 
-            // Count Up Animation
-            const observerOptions = { threshold: 0.5 };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counters = entry.target.querySelectorAll('.stat-value[data-target]');
-                        counters.forEach(counter => {
-                            const target = +counter.getAttribute('data-target');
-                            const speed = 200;
-                            const increment = target / speed;
-                            const updateCount = () => {
-                                const count = +counter.innerText.replace(/,/g, '');
-                                if (count < target) {
-                                    counter.innerText = Math.ceil(count + increment).toLocaleString();
-                                    setTimeout(updateCount, 20);
-                                } else {
-                                    counter.innerText = target.toLocaleString();
-                                }
-                            };
-                            updateCount();
-                        });
-                        observer.unobserve(entry.target);
+            // Attach click listeners to service cards
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const titleElement = card.querySelector('.service-text');
+                    if (titleElement) {
+                        const title = titleElement.innerText.trim();
+                        openServiceModal(title);
                     }
                 });
-            }, observerOptions);
+            });
+        });
 
-            document.querySelectorAll('.stats-section').forEach(section => { observer.observe(section); });
+        // Count Up Animation
+        const observerOptions = { threshold: 0.5 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-value[data-target]');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const speed = 200;
+                        const increment = target / speed;
+                        const updateCount = () => {
+                            const count = +counter.innerText.replace(/,/g, '');
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + increment).toLocaleString();
+                                setTimeout(updateCount, 20);
+                            } else {
+                                counter.innerText = target.toLocaleString();
+                            }
+                        };
+                        updateCount();
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-            // Status Box
-            const statusBox = document.getElementById('statusBox');
+        document.querySelectorAll('.stats-section').forEach(section => { observer.observe(section); });
 
-            // Form Submit
-            function handleFormSubmit(e) {
-                e.preventDefault();
-                const form = document.getElementById('contactForm');
-                const btn = form.querySelector('.submit-btn');
-                const originalBtnText = btn.innerHTML;
+        // Status Box
+        const statusBox = document.getElementById('statusBox');
 
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-                btn.style.opacity = '0.7';
+        // Form Submit
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('contactForm');
+            const btn = form.querySelector('.submit-btn');
+            const originalBtnText = btn.innerHTML;
 
-                fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            form.style.display = 'none';
-                            document.getElementById('successMessage').style.display = 'block';
-                            document.querySelector('.form-header').style.display = 'none';
-                        } else {
-                            alert('Submission failed. Please try again.');
-                            btn.innerHTML = originalBtnText;
-                            btn.style.opacity = '1';
-                        }
-                    })
-                    .catch(error => {
-                        alert('Submission error. Check connection.');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            btn.style.opacity = '0.7';
+
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        document.getElementById('successMessage').style.display = 'block';
+                        document.querySelector('.form-header').style.display = 'none';
+                    } else {
+                        alert('Submission failed. Please try again.');
                         btn.innerHTML = originalBtnText;
                         btn.style.opacity = '1';
-                    });
-                return false;
-            }
+                    }
+                })
+                .catch(error => {
+                    alert('Submission error. Check connection.');
+                    btn.innerHTML = originalBtnText;
+                    btn.style.opacity = '1';
+                });
+            return false;
+        }
 
-            // Pincode
-            function updateStatusBox(val) {
-                if (!val) {
-                    statusBox.className = 'status-box status-ready';
-                    statusBox.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Ready to search!';
-                } else if (val.length < 6) {
-                    statusBox.className = 'status-box status-warning';
-                    statusBox.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Digits remaining: ' + (6 - val.length);
-                } else {
-                    statusBox.className = 'status-box status-ready';
-                    statusBox.innerHTML = '<i class="fa-solid fa-check"></i> Ready to check.';
-                }
-            }
-
-            async function checkPincode() {
-                const input = document.getElementById('pincodeInput');
-                const pincode = input.value.trim();
-
-                if (pincode.length !== 6 || isNaN(pincode)) {
-                    statusBox.className = 'status-box status-error';
-                    statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid Pincode';
-                    return;
-                }
-
+        // Pincode
+        function updateStatusBox(val) {
+            if (!val) {
                 statusBox.className = 'status-box status-ready';
-                statusBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
+                statusBox.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Ready to search!';
+            } else if (val.length < 6) {
+                statusBox.className = 'status-box status-warning';
+                statusBox.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Digits remaining: ' + (6 - val.length);
+            } else {
+                statusBox.className = 'status-box status-ready';
+                statusBox.innerHTML = '<i class="fa-solid fa-check"></i> Ready to check.';
+            }
+        }
 
-                await new Promise(r => setTimeout(r, 1000));
+        async function checkPincode() {
+            const input = document.getElementById('pincodeInput');
+            const pincode = input.value.trim();
 
-                if (pincode.startsWith('11')) {
-                    statusBox.className = 'status-box status-success';
-                    statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Available!</h4><p>We serve Delhi/New Delhi/Rohini</p></div>';
-                } else {
-                    statusBox.className = 'status-box status-error';
-                    statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Not Available in this area.';
-                }
+            if (pincode.length !== 6 || isNaN(pincode)) {
+                statusBox.className = 'status-box status-error';
+                statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid Pincode';
+                return;
             }
 
-            document.getElementById('pincodeInput').addEventListener('keypress', e => {
-                if (e.key === 'Enter') checkPincode();
-            });
+            statusBox.className = 'status-box status-ready';
+            statusBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
 
-            // 3D TILT EFFECT (Re-added)
-            document.querySelectorAll('.stat-card, .service-card, .pincode-card, .img-wrapper').forEach(card => {
-                card.addEventListener('mousemove', function (e) {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
+            await new Promise(r => setTimeout(r, 1000));
 
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-
-                    const rotateX = ((y - centerY) / centerY) * -5; // Subtle tilt
-                    const rotateY = ((x - centerX) / centerX) * 5;
-
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                });
-
-                card.addEventListener('mouseleave', function () {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-                });
-            });
-
-            // Journey Steps Logic
-            const journeyData = [
-                {
-                    id: 1,
-                    title: "Discovery & Site Visit",
-                    desc: "We understand your vision, constraints and walk through the space together.",
-                    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-                    tags: ["Progress photos", "Quality checks", "Project manager"]
-                },
-                {
-                    id: 2,
-                    title: "Design & Planning",
-                    desc: "Concepts, layouts and material recommendations tailored to your budget.",
-                    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80",
-                    tags: ["3D Visualization", "Material Selection", "Budget Planning"]
-                },
-                {
-                    id: 3,
-                    title: "Execution",
-                    desc: "Our vetted professionals execute the plan with regular updates and check-ins.",
-                    img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80",
-                    tags: ["Vetted Pros", "Milestone Tracking", "Site Supervision"]
-                },
-                {
-                    id: 4,
-                    title: "Handover & Aftercare",
-                    desc: "Walkthrough, quality checks and support even after the project is done.",
-                    img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
-                    tags: ["Final Inspection", "Warranty Support", "Maintenance Guide"]
-                }
-            ];
-
-            function setJourneyStep(stepId) {
-                // Update Active Card
-                document.querySelectorAll('.journey-step-card').forEach(card => card.classList.remove('active'));
-                document.querySelectorAll('.journey-step-card')[stepId - 1].classList.add('active');
-
-                // Update Content with Fade Animation
-                const img = document.getElementById('journeyImg');
-                const title = document.getElementById('journeyTitle');
-                const desc = document.getElementById('journeyDesc');
-                const badge = document.getElementById('journeyStepBadge');
-                const tagsParams = document.getElementById('journeyTags');
-
-                const data = journeyData[stepId - 1];
-
-                // Animate Out
-                title.style.opacity = 0;
-                desc.style.opacity = 0;
-                img.style.opacity = 0.5;
-
-                setTimeout(() => {
-                    // Update Data
-                    badge.innerText = stepId === 4 ? 'FINAL' : `STEP ${stepId}`;
-                    title.innerText = data.title;
-                    desc.innerText = data.desc;
-                    img.src = data.img;
-
-                    // Update Tags
-                    tagsParams.innerHTML = data.tags.map(tag => `<span class="step-tag">${tag}</span>`).join('');
-
-                    // Animate In
-                    title.style.opacity = 1;
-                    desc.style.opacity = 1;
-                    img.style.opacity = 1;
-                }, 200);
+            if (pincode.startsWith('11')) {
+                statusBox.className = 'status-box status-success';
+                statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Available!</h4><p>We serve Delhi/New Delhi/Rohini</p></div>';
+            } else {
+                statusBox.className = 'status-box status-error';
+                statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Not Available in this area.';
             }
-        </script>
-        <!-- Service Modal (Updated for Phone) -->
-        <div id="serviceModal" class="service-modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 id="modalServiceTitle">Get in Touch</h3>
-                    <button class="close-modal-btn" onclick="closeServiceModal()">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+        }
+
+        document.getElementById('pincodeInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') checkPincode();
+        });
+
+        // 3D TILT EFFECT (Re-added)
+        document.querySelectorAll('.stat-card, .service-card, .pincode-card, .img-wrapper').forEach(card => {
+            card.addEventListener('mousemove', function (e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -5; // Subtle tilt
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', function () {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+
+        // Journey Steps Logic
+        const journeyData = [
+            {
+                id: 1,
+                title: "Discovery & Site Visit",
+                desc: "We understand your vision, constraints and walk through the space together.",
+                img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+                tags: ["Progress photos", "Quality checks", "Project manager"]
+            },
+            {
+                id: 2,
+                title: "Design & Planning",
+                desc: "Concepts, layouts and material recommendations tailored to your budget.",
+                img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80",
+                tags: ["3D Visualization", "Material Selection", "Budget Planning"]
+            },
+            {
+                id: 3,
+                title: "Execution",
+                desc: "Our vetted professionals execute the plan with regular updates and check-ins.",
+                img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80",
+                tags: ["Vetted Pros", "Milestone Tracking", "Site Supervision"]
+            },
+            {
+                id: 4,
+                title: "Handover & Aftercare",
+                desc: "Walkthrough, quality checks and support even after the project is done.",
+                img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
+                tags: ["Final Inspection", "Warranty Support", "Maintenance Guide"]
+            }
+        ];
+
+        function setJourneyStep(stepId) {
+            // Update Active Card
+            document.querySelectorAll('.journey-step-card').forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.journey-step-card')[stepId - 1].classList.add('active');
+
+            // Update Content with Fade Animation
+            const img = document.getElementById('journeyImg');
+            const title = document.getElementById('journeyTitle');
+            const desc = document.getElementById('journeyDesc');
+            const badge = document.getElementById('journeyStepBadge');
+            const tagsParams = document.getElementById('journeyTags');
+
+            const data = journeyData[stepId - 1];
+
+            // Animate Out
+            title.style.opacity = 0;
+            desc.style.opacity = 0;
+            img.style.opacity = 0.5;
+
+            setTimeout(() => {
+                // Update Data
+                badge.innerText = stepId === 4 ? 'FINAL' : `STEP ${stepId}`;
+                title.innerText = data.title;
+                desc.innerText = data.desc;
+                img.src = data.img;
+
+                // Update Tags
+                tagsParams.innerHTML = data.tags.map(tag => `<span class="step-tag">${tag}</span>`).join('');
+
+                // Animate In
+                title.style.opacity = 1;
+                desc.style.opacity = 1;
+                img.style.opacity = 1;
+            }, 200);
+        }
+    </script>
+    <!-- Service Modal (Updated for Phone) -->
+    <div id="serviceModal" class="service-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalServiceTitle">Get in Touch</h3>
+                <button class="close-modal-btn" onclick="closeServiceModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="serviceSuccessMessage" style="display: none; text-align: center; padding: 20px;">
+                    <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--text-dark);">Request Sent!</h4>
+                    <p style="color: var(--text-gray);">We will call you shortly.</p>
+                    <button onclick="closeServiceModal()" class="secondary-btn"
+                        style="margin-top: 20px; padding: 10px 30px; font-size: 0.9rem;">Close</button>
                 </div>
-                <div class="modal-body">
-                    <div id="serviceSuccessMessage" style="display: none; text-align: center; padding: 20px;">
-                        <div style="font-size: 3rem; color: #10b981; margin-bottom: 15px;">
-                            <i class="fa-regular fa-circle-check"></i>
-                        </div>
-                        <h4 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--text-dark);">Request Sent!</h4>
-                        <p style="color: var(--text-gray);">We will call you shortly.</p>
-                        <button onclick="closeServiceModal()" class="secondary-btn"
-                            style="margin-top: 20px; padding: 10px 30px; font-size: 0.9rem;">Close</button>
+
+                <form id="serviceForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
+                    class="modal-form" onsubmit="handleServiceFormSubmit(event)">
+                    <input type="hidden" name="_subject" id="modalSubject" value="New Service Inquiry">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <i class="fa-regular fa-user input-icon" style="position: absolute; left: 18px; top: 46px;"></i>
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                     </div>
 
-                    <form id="serviceForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
-                        class="modal-form" onsubmit="handleServiceFormSubmit(event)">
-                        <input type="hidden" name="_subject" id="modalSubject" value="New Service Inquiry">
-                        <input type="hidden" name="_captcha" value="false">
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <i class="fa-solid fa-phone input-icon" style="position: absolute; left: 18px; top: 46px;"></i>
+                        <input type="tel" name="phone" class="form-control" placeholder="10-digit Mobile Number"
+                            pattern="[0-9]{10}" title="Please enter a valid 10-digit number" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="form-label">Name</label>
-                            <i class="fa-regular fa-user input-icon"
-                                style="position: absolute; left: 18px; top: 46px;"></i>
-                            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <i class="fa-regular fa-comment-dots input-icon"
+                            style="position: absolute; left: 18px; top: 46px;"></i>
+                        <textarea name="message" class="form-control" placeholder="Details about your requirement..."
+                            style="height: 100px; resize: vertical;" required></textarea>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="form-label">Phone Number</label>
-                            <i class="fa-solid fa-phone input-icon"
-                                style="position: absolute; left: 18px; top: 46px;"></i>
-                            <input type="tel" name="phone" class="form-control" placeholder="10-digit Mobile Number"
-                                pattern="[0-9]{10}" title="Please enter a valid 10-digit number" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Message</label>
-                            <i class="fa-regular fa-comment-dots input-icon"
-                                style="position: absolute; left: 18px; top: 46px;"></i>
-                            <textarea name="message" class="form-control"
-                                placeholder="Details about your requirement..." style="height: 100px; resize: vertical;"
-                                required></textarea>
-                        </div>
-
-                        <button type="submit" class="submit-btn">Send Message <i
-                                class="fa-solid fa-arrow-right"></i></button>
-                    </form>
-                </div>
+                    <button type="submit" class="submit-btn">Send Message <i
+                            class="fa-solid fa-arrow-right"></i></button>
+                </form>
             </div>
         </div>
+    </div>
+    <!-- Whatsapp -->
+    <a href="https://wa.me/919899942377?text=I%20want%20to%20Redesign%20my%20House" class="whatsapp-float"
+        target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 </body>
 
 </html>
