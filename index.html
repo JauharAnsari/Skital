@@ -1057,10 +1057,10 @@
                 margin-top: 5px;
             }
 
-            /* Show only 6 items on mobile */
-            .service-card:nth-child(n+7) {
+            /* Show all items on mobile */
+            /* .service-card:nth-child(n+7) {
                 display: none !important;
-            }
+            } */
 
             .service-card p {
                 display: none;
@@ -1589,9 +1589,13 @@
                 <div class="service-icon-circle"><i class="fa-solid fa-tree"></i></div>
                 <div class="service-text">Terrace</div>
             </div>
-            <div class="service-card">
-                <div class="service-icon-circle"><i class="fa-solid fa-ellipsis"></i></div>
-                <div class="service-text">More</div>
+            <div class="service-card" onclick="openServiceModal('Electrician')">
+                <div class="service-icon-circle"><i class="fa-solid fa-bolt"></i></div>
+                <div class="service-text">Electrician</div>
+            </div>
+            <div class="service-card" onclick="location.href='painter.html'">
+                <div class="service-icon-circle"><i class="fa-solid fa-paint-roller"></i></div>
+                <div class="service-text">Painter</div>
             </div>
         </div>
     </div>

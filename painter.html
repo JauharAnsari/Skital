@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skital - Expert Terrace Services</title>
+    <title>Skital - Premium Construction & Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
@@ -467,8 +467,7 @@
         }
 
         .service-card {
-            background: rgba(240, 249, 255, 0.9);
-            /* Light Blue Tint */
+            background: var(--surface-color);
             backdrop-filter: blur(15px);
             padding: 40px 25px;
             border-radius: 24px;
@@ -691,6 +690,40 @@
         }
 
         @media (max-width: 600px) {
+            .hero-title {
+                font-size: 2.2rem !important;
+                white-space: normal;
+                text-align: center;
+            }
+
+            /* Reduced gap */
+            .hero-section {
+                padding-top: 50px !important;
+                /* Even tighter */
+                min-height: 140px !important;
+                /* Much smaller height for mobile */
+                height: auto !important;
+                display: block;
+                /* Remove flex centering to allow custom padding */
+            }
+
+            .hero-subtitle,
+            .cta-btns {
+                display: none !important;
+            }
+
+            /* Header Box Style for Mobile */
+            header {
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px) !important;
+                margin: 10px 15px;
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                padding: 10px 20px;
+                box-shadow: none !important;
+                top: 10px;
+            }
+
             .journey-section {
                 padding: 60px 0;
             }
@@ -722,34 +755,88 @@
                 font-size: 1.5rem;
             }
 
-            /* Horizontal Scroll for Mobile */
-            .stats-grid,
+            /* Horizontal Scroll for Mobile - REPLACED with Grid to match Carpenter */
+            /* Mobile Services: 2-Column Grid */
             .services-grid {
-                /* Remove flex/scroll from general mobile query as we are overriding in specific block, but for safety kept or removed. 
-                  Actually the block at 932 overrides this. But let's clean up if possible.
-                  For now, I will leave this as is to avoid conflicts with other pages if they share CSS, 
-                  but strictly for Carpenter page, the detailed query below handles it. */
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                gap: 20px;
-                padding-bottom: 20px;
-                margin: 0 -20px;
-                padding-left: 20px;
-                padding-right: 20px;
-                -webkit-overflow-scrolling: touch;
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px !important;
+                overflow-x: visible !important;
+                scroll-snap-type: none;
+                margin: 0 !important;
+                padding: 0 10px !important;
+                justify-content: center;
             }
 
-            .stats-grid::-webkit-scrollbar,
+            .stats-grid {
+                display: flex !important;
+                gap: 10px;
+                margin: 0;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .stats-grid::-webkit-scrollbar {
+                display: none;
+            }
+
             .services-grid::-webkit-scrollbar {
                 display: none;
             }
 
-            .stat-card,
-            .service-card {
-                min-width: 280px;
-                scroll-snap-align: center;
+            .stat-card {
+                flex: 1;
+                min-width: 0;
+                scroll-snap-align: none;
                 margin: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                background: white;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                padding: 10px 5px;
+                gap: 2px;
+                border-radius: 12px;
+            }
+
+            .service-card {
+                min-width: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box;
+                scroll-snap-align: none;
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                background: transparent;
+                box-shadow: none;
+                margin-bottom: 0;
+                border: none;
+            }
+
+            .service-card .img-wrapper {
+                height: 140px !important;
+                border-radius: 16px;
+                margin-bottom: 10px;
+            }
+
+            /* Fix inner padding of the text container on mobile */
+            .service-card>div:last-child {
+                padding: 0 !important;
+                text-align: center;
+            }
+
+            .service-card .service-text {
+                margin-bottom: 0 !important;
+                font-size: 1rem !important;
+                font-weight: 700;
+                color: var(--text-dark);
+            }
+
+            .service-card p {
+                display: none !important;
+                /* Hide description text on mobile as requested */
             }
         }
 
@@ -800,536 +887,22 @@
             color: #64748b;
         }
 
-        .form-control {
-            padding-left: 50px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: var(--primary-gradient);
-            color: white;
-            font-weight: 800;
-            padding: 20px;
-            border-radius: 15px;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 30px -5px rgba(6, 182, 212, 0.4);
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px -5px rgba(6, 182, 212, 0.5);
-        }
-
-        /* RESPONSIVE */
-        /* RESPONSIVE & DENSITY OPTIMIZATION */
-        @media (max-width: 768px) {
-
-            /* Typography Scaling */
-            .hero-title {
-                font-size: 2.5rem;
-                /* Reduced from 3rem */
-            }
-
-            .brand-name {
-                font-size: 1.5rem;
-            }
-
-            .nav-btn {
-                padding: 8px 16px;
-                font-size: 0.85rem;
-            }
-
-            .section h2,
-            .journey-section h2,
-            .services-section h2 {
-                font-size: 2rem;
-                /* Standardize and reduce section headers */
-            }
-
-            p,
-            .service-sub,
-            .step-info p {
-                font-size: 0.9rem;
-                /* Slightly smaller body text */
-            }
-
-            /* Layout & Spacing */
-            .section {
-                padding: 30px 0;
-                /* Tight spacing */
-            }
-
-            /* Hide Hero Elements on Mobile */
-            .hero-subtitle,
-            .cta-btns {
-                display: none !important;
-            }
-
-            .hero-section {
-                min-height: auto !important;
-                padding-top: 10px;
-                /* Reduced from 120px */
-                padding-bottom: 0px;
-                display: block;
-                /* Remove flex centering */
-            }
-
-            .hero-title {
-                margin-bottom: 10px;
-            }
-
-            /* Header Box Style for Mobile */
-            header {
-                background: rgba(255, 255, 255, 0.1) !important;
-                /* Glass effect */
-                backdrop-filter: blur(10px) !important;
-                margin: 10px 15px;
-                border-radius: 20px;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                /* Just the border */
-                padding: 10px 20px;
-                box-shadow: none !important;
-                top: 10px;
-            }
-
-            /* Reduced gap */
-            .hero-section {
-                padding-top: 50px !important;
-                /* Even tighter */
-                min-height: 140px !important;
-                /* Much smaller height for mobile */
-                height: auto !important;
-            }
-
-            .hero-title {
-                /* Reduced gap */
-                font-size: 1.5rem;
-                /* Smaller title for mobile */
-                white-space: nowrap;
-                /* Slightly smaller title to fit better */
-                text-align: center;
-                /* Center align looks better usually, or keep left if intended */
-            }
-
-            .hero-title br {
-                display: none;
-            }
-
-
-            .timeline-container {
-                flex-direction: column;
-            }
-
-            /* Component Density */
-            .journey-step-card {
-                padding: 15px;
-                border-radius: 16px;
-            }
-
-            /* Stats: Row Layout (Icon Left, Text Right) */
-            /* Stats & Services: Single Frame for Stats, Scroll for Services */
-            /* Mobile Services: 2-Column Grid */
-            .services-grid {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 15px !important;
-                overflow-x: visible !important;
-                scroll-snap-type: none;
-                margin: 0 !important;
-                padding: 0 10px !important;
-                justify-content: center;
-            }
-
-            .stats-grid {
-                display: flex !important;
-                gap: 10px;
-                margin: 0;
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .stats-grid::-webkit-scrollbar {
-                display: none;
-            }
-
-            .services-grid::-webkit-scrollbar {
-                display: none;
-            }
-
-            .stat-card {
-                flex: 1;
-                min-width: 0;
-                /* Allow shrinking */
-                scroll-snap-align: none;
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-                /* Stack Vertical */
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                background: white;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-                padding: 10px 5px;
-                /* Minimal padding */
-                gap: 2px;
-                border-radius: 12px;
-            }
-
-            .stat-card .stat-value {
-                font-size: 1.2rem;
-                margin: 0;
-                color: #0f172a;
-                width: 100%;
-                justify-content: center !important;
-            }
-
-            .stat-card .stat-label {
-                font-size: 0.7rem;
-                line-height: 1.1;
-                white-space: normal;
-                /* Allow wrapping */
-            }
-
-            .stat-card .stat-sub {
-                display: none !important;
-            }
-
-            .stat-card .icon-box {
-                display: none !important;
-            }
-
-            .stat-info {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                min-width: 0;
-                /* Enable truncation/wrapping if needed */
-            }
-
-
-
-            /* Fix Rating Stars Mobile */
-            /* Fix Rating Stars Mobile */
-            .stat-card .stat-value span {
-                display: none !important;
-            }
-
-            .service-card {
-                min-width: 0 !important;
-                width: 100% !important;
-                flex: none !important;
-                box-sizing: border-box;
-                display: flex;
-                flex-direction: column;
-                margin-bottom: 0px;
-                min-height: 0 !important;
-                height: auto !important;
-                padding-bottom: 10px !important;
-                border-radius: 20px;
-                box-shadow: none;
-                background: transparent;
-            }
-
-            .service-card .img-wrapper {
-                height: 140px !important;
-                border-radius: 16px;
-                margin-bottom: 10px;
-            }
-
-            /* Fix inner padding of the text container on mobile */
-            .service-card>div:last-child {
-                padding: 0 !important;
-                text-align: center;
-            }
-
-            .service-card .service-text {
-                margin-bottom: 0 !important;
-                font-size: 1rem !important;
-                font-weight: 700;
-                color: var(--text-dark);
-            }
-
-            .service-card h3 {
-                font-size: 1rem !important;
-                margin-top: 5px;
-                margin-bottom: 0 !important;
-            }
-
-            .desktop-only-text {
-                display: none !important;
-            }
-
-            /* Show all items */
-            .service-card:nth-child(n+7) {
-                display: flex !important;
-            }
-
-            .service-card p {
-                display: none !important;
-                /* Hide description text on mobile as requested */
-                font-size: 0.9rem !important;
-                color: var(--text-gray);
-                margin-top: 5px;
-            }
-
-            /* Tighten Layout for "One Frame" Feel */
-            .section {
-                padding: 10px 0 !important;
-            }
-
-            .stats-section {
-                padding-bottom: 0 !important;
-                margin-bottom: 0 !important;
-            }
-
-            .hero-section {
-                padding-bottom: 0 !important;
-            }
-
-            .availability-section {
-                margin-top: 0px;
-                padding-top: 0;
-            }
-
-            .service-icon-circle {
-                width: 30px;
-                height: 30px;
-                font-size: 0.9rem;
-                margin-bottom: 5px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #f1f5f9;
-                border-radius: 50%;
-                color: var(--primary-color);
-            }
-
-            /* Check Availability Optimization */
-            .availability-section .pin-icon-top,
-            .availability-section h2,
-            .availability-section p {
-                display: none;
-            }
-
-            .availability-section .pincode-card {
-                padding: 15px;
-                background: transparent;
-                border: none;
-                box-shadow: none;
-                margin: 0;
-            }
-
-            .availability-section {
-                padding-bottom: 0px;
-                margin-bottom: 0px !important;
-            }
-
-            /* Services/Expertise Refinements */
-            .service-sub {
-                display: none !important;
-            }
-
-            .section h2,
-            .journey-section h2,
-            .services-section h2 {
-                font-size: 1.5rem !important;
-                margin-bottom: 5px !important;
-            }
-
-            .services-section {
-                padding-top: 5px !important;
-                margin-top: 0 !important;
-            }
-
-            .search-container {
-                flex-direction: row;
-                gap: 5px;
-                position: relative;
-                max-width: 100%;
-                background: white;
-                border: 1px solid rgba(0, 0, 0, 0.1);
-                border-radius: 12px;
-                padding: 4px;
-            }
-
-            .input-wrapper {
-                width: auto;
-            }
-
-            /* Hide left search icon since button is on right */
-            .search-icon-input {
-                display: none;
-            }
-
-            .pincode-input {
-                padding: 10px 15px;
-                font-size: 0.95rem;
-                height: 44px;
-                border: none;
-                box-shadow: none;
-            }
-
-            .pincode-input:focus {
-                box-shadow: none;
-            }
-
-            /* Hide Static Contact Section on Mobile */
-            .contact-section-new {
-                display: none;
-            }
-
-            /* Modal Styles */
-            .contact-modal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                backdrop-filter: blur(5px);
-                z-index: 2000;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-
-            .contact-modal.active {
-                display: flex;
-                opacity: 1;
-            }
-
-            .contact-modal .contact-form-container {
-                width: 100%;
-                max-width: 500px;
-                max-height: 90vh;
-                overflow-y: auto;
-                position: relative;
-                margin: 0;
-                animation: slideUp 0.3s ease;
-            }
-
-            @keyframes slideUp {
-                from {
-                    transform: translateY(50px);
-                    opacity: 0;
-                }
-
-                to {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-            }
-
-            .close-modal-btn {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                color: var(--text-dark);
-                cursor: pointer;
-                z-index: 10;
-            }
-
-            .go-btn {
-                width: 44px;
-                height: 44px;
-                padding: 0;
-                min-width: 44px;
-                border-radius: 8px;
-                display: flex !important;
-                align-items: center;
-                justify-content: center;
-                font-size: 0 !important;
-                /* Hide text */
-                background: #34d399;
-                /* Green like uploaded image */
-                line-height: normal;
-                /* Reset line height */
-            }
-
-            /* Hide Text "Check" in button, keep icon */
-            /* Consolidated above */
-
-            .go-btn i {
-                font-size: 1.2rem;
-                /* Slightly larger icon */
-                color: white;
-                margin: 0 !important;
-                padding: 0 !important;
-                width: auto;
-                height: auto;
-                display: inline-block;
-                line-height: normal;
-                /* Reset */
-                transform: translateY(0);
-                /* Reset any transform */
-            }
-
-            /* Change arrow to magnifying glass search icon if needed, but user said 'search button' look like this. 
-               The HTML has arrow-right. I should probably switch the icon content via CSS or assume the arrow is fine?
-               The image shows a magnifying glass. I'll switch the class in HTML or use content replacement. 
-               Actually safely, I'll just Replace the Icon class in HTML or accept arrow. 
-               The user said 'Make Search Button look like this', the image has a Search Glass.
-               I will change the icon in the button via CSS content rewrite or just trust the user accepts the shape first. 
-               Let's try to swap the icon via CSS hack or JS? No, I can replace the HTML too.
-               Let's stick to CSS shape first. I'll make the icon visible. */
-
-            .go-btn i::before {
-                content: "\f002";
-                /* FontAwesome Search Icon code */
-            }
-
-            .status-box {
-                display: none !important;
-            }
-
-            /* Services Grid Gap */
-            .services-section {
-                padding-top: 10px;
-            }
-
-            .services-grid {
-                gap: 15px;
-            }
-
-            .contact-form-container {
-                padding: 25px 15px;
-            }
-        }
-
-        .whatsapp-float {
+        /* SERVICE MODAL (Global) */
+        .service-modal {
+            display: none;
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2100;
             align-items: center;
             justify-content: center;
-            font-size: 35px;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
-            text-decoration: none;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         /* HOVER OVERLAY STYLES */
@@ -1376,47 +949,6 @@
             line-height: 1.4;
         }
 
-        /* CONTACT MODAL */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        /* SERVICE MODAL (Global - Matches index.html) */
-        .service-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 2100;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
         .service-modal.active {
             display: flex;
             opacity: 1;
@@ -1424,6 +956,7 @@
 
         .service-modal .modal-content {
             background: #ffffff;
+            /* White background */
             border-radius: 24px;
             width: 100%;
             max-width: 500px;
@@ -1432,10 +965,6 @@
             animation: modalSlideUp 0.3s ease;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 0;
-            /* Reset padding as header/body handle it */
-            transform: none;
-            /* Reset distinct transform */
         }
 
         @keyframes modalSlideUp {
@@ -1478,8 +1007,6 @@
             cursor: pointer;
             color: var(--text-gray);
             transition: all 0.2s;
-            position: static;
-            /* Reset absolute positioning */
         }
 
         .close-modal-btn:hover {
@@ -1501,7 +1028,6 @@
             color: #475569;
             font-weight: 600;
             margin-bottom: 8px;
-            display: block;
         }
 
         .modal-form .form-control {
@@ -1580,6 +1106,29 @@
                 left: 15px !important;
             }
         }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 
@@ -1588,113 +1137,69 @@
     <div class="ambient-blob ambient-1"></div>
     <div class="ambient-blob ambient-2"></div>
 
-    <!-- CARPENTER HERO -->
+    <!-- PAINTER HERO -->
     <section class="hero-section"
-        style="min-height: 50vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://loremflickr.com/1200/800/rooftop,garden,terrace'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px;">
+        style="min-height: 50vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.livspace-cdn.com/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/ond-1634120396-Obfdc/jas-2023-1688629305-0KDli/false-ceiling-1689837597-hCpiu/04-1689844340-MvC9v.jpg'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px;">
         <div class="hero-content">
             <h1 class="hero-title"
-                style="color: white; -webkit-text-fill-color: white; font-size: 5rem; margin-bottom: 10px;">Terrace
+                style="color: white; -webkit-text-fill-color: white; font-size: 5rem; margin-bottom: 10px;">Painter
             </h1>
             <p
                 style="color: rgba(255,255,255,0.95); font-size: 1.2rem; max-width: 600px; margin: 0 auto; font-weight: 500;">
-                Beautiful Rooftop Designs & Waterproofing</p>
+                Expert Painting & False Ceiling Services</p>
         </div>
     </section>
 
-    <!-- CARPENTER SERVICES -->
-    <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-        <!-- Horticulture -->
-        <div class="service-card"
-            style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
-            <div class="img-wrapper">
-                <img src="https://tse2.mm.bing.net/th/id/OIP.fVMCtGvlb49V-4_g9GKqfAHaFj?rs=1&pid=ImgDetMain&o=7&rm=3"
-                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                    alt="Horticulture">
-                <div class="hover-details">
-                    <div class="detail-price">Starts @ ₹450/sq.ft</div>
-                    <div class="detail-feat">
-                        <i class="fa-solid fa-check"></i> Organic Maintenance<br>
-                        <i class="fa-solid fa-check"></i> Seasonal Designs
+    <!-- PAINTER SERVICES -->
+    <div class="container section services-section" style="animation-delay: 0.2s; padding-top: 60px;">
+        <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <!-- Painting -->
+            <div class="service-card"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://buildingandinteriors.com/wp-content/uploads/2022/11/Painting-the-wall-Feature-image_Bergers-Paints.jpg"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="Painting">
+                    <div class="hover-details">
+                        <div class="detail-price">Starts @ ₹12/sq.ft</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> High Quality Paints<br>
+                            <i class="fa-solid fa-check"></i> Professional Finish
+                        </div>
                     </div>
                 </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Painting</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Interior and exterior painting to refresh your
+                        home.</p>
+                </div>
             </div>
-            <div style="padding: 25px;">
-                <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Horticulture</div>
-                <p style="color: var(--text-gray); font-size: 1rem;">Beautiful landscape design and plant care.</p>
-            </div>
-        </div>
 
-        <!-- Waterproofing -->
-        <div class="service-card"
-            style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
-            <div class="img-wrapper">
-                <img src="https://tse2.mm.bing.net/th/id/OIP.MCM0Q2Xea6CBNPgj10rI_AHaEo?rs=1&pid=ImgDetMain&o=7&rm=3"
-                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                    alt="Waterproofing">
-                <div class="hover-details">
-                    <div class="detail-price">Starts @ ₹950/sq.ft</div>
-                    <div class="detail-feat">
-                        <i class="fa-solid fa-check"></i> 10-Year Warranty<br>
-                        <i class="fa-solid fa-check"></i> Leakage Proofing
+            <!-- False Ceiling -->
+            <div class="service-card"
+                style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
+                <div class="img-wrapper">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.p2ceHSd8u0XTyopANFXmlQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3"
+                        style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                        alt="False Ceiling">
+                    <div class="hover-details">
+                        <div class="detail-price">Starts @ ₹85/sq.ft</div>
+                        <div class="detail-feat">
+                            <i class="fa-solid fa-check"></i> Modern Designs<br>
+                            <i class="fa-solid fa-check"></i> Durable Materials
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div style="padding: 25px;">
-                <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Waterproofing</div>
-                <p style="color: var(--text-gray); font-size: 1rem;">Complete rooftop waterproofing solutions with
-                    guarantee.</p>
-            </div>
-        </div>
-
-        <!-- Pergola/Porta cabin -->
-        <div class="service-card"
-            style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
-            <div class="img-wrapper">
-                <img src="https://lancastercountybackyard.b-cdn.net/wp-content/uploads/fly-images/1624/what-is-a-the-purpose-of-a-pergola-1600x9999.jpg"
-                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                    alt="Pergola/Porta cabin">
-                <div class="hover-details">
-                    <div class="detail-price">Starts @ ₹1,200/sq.ft</div>
-                    <div class="detail-feat">
-                        <i class="fa-solid fa-check"></i> Weather Resistant<br>
-                        <i class="fa-solid fa-check"></i> Modern Designs
-                    </div>
+                <div style="padding: 25px;">
+                    <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">False Ceiling</div>
+                    <p style="color: var(--text-gray); font-size: 1rem;">Modern false ceiling designs for elegance and
+                        lighting.</p>
                 </div>
-            </div>
-            <div style="padding: 25px;">
-                <div class="service-text" style="font-size: 1.8rem; margin-bottom: 10px;">Pergola/Porta cabin</div>
-                <p style="color: var(--text-gray); font-size: 1rem;">Stylish pergolas and functional porta cabins.</p>
-            </div>
-        </div>
-
-        <!-- Flooring -->
-        <div class="service-card"
-            style="text-align: left; padding: 0; min-height: 400px; display: flex; flex-direction: column; overflow: hidden;">
-            <div class="img-wrapper">
-                <img src="https://tse1.explicit.bing.net/th/id/OIP.hlarEhj5byG5L3ih-8YZhAHaFj?rs=1&pid=ImgDetMain&o=7&rm=3"
-                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
-                    alt="Flooring">
-                <div class="hover-details">
-                    <div class="detail-price">Starts @ ₹150/sq.ft</div>
-                    <div class="detail-feat">
-                        <i class="fa-solid fa-check"></i> Anti-Skid Tiles<br>
-                        <i class="fa-solid fa-check"></i> Durable Material
-                    </div>
-                </div>
-            </div>
-            <div style="padding: 25px;">
-                <div class="service-text" style="font-size: 1.8rem; margin-bottom: 5px;">Flooring</div>
-                <p style="color: var(--text-gray); font-size: 1rem;">Premium terrace flooring options.</p>
             </div>
         </div>
     </div>
-    </div>
-
-    <!-- CONTACT REMOVED -->
 
     <!-- Whatsapp -->
     <a href="https://wa.me/919899942377?text=I%20want%20to%20Redesign%20my%20House" class="whatsapp-float"
@@ -1782,113 +1287,6 @@
             });
         });
 
-        // Count Up Animation
-        const observerOptions = { threshold: 0.5 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counters = entry.target.querySelectorAll('.stat-value[data-target]');
-                    counters.forEach(counter => {
-                        const target = +counter.getAttribute('data-target');
-                        const speed = 200;
-                        const increment = target / speed;
-                        const updateCount = () => {
-                            const count = +counter.innerText.replace(/,/g, '');
-                            if (count < target) {
-                                counter.innerText = Math.ceil(count + increment).toLocaleString();
-                                setTimeout(updateCount, 20);
-                            } else {
-                                counter.innerText = target.toLocaleString();
-                            }
-                        };
-                        updateCount();
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.stats-section').forEach(section => { observer.observe(section); });
-
-        // Status Box
-        const statusBox = document.getElementById('statusBox');
-
-        // Form Submit
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const form = document.getElementById('contactForm');
-            const btn = form.querySelector('.submit-btn');
-            const originalBtnText = btn.innerHTML;
-
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-            btn.style.opacity = '0.7';
-
-            fetch(form.action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            })
-                .then(response => {
-                    if (response.ok) {
-                        form.style.display = 'none';
-                        document.getElementById('successMessage').style.display = 'block';
-                        document.querySelector('.form-header').style.display = 'none';
-                    } else {
-                        alert('Submission failed. Please try again.');
-                        btn.innerHTML = originalBtnText;
-                        btn.style.opacity = '1';
-                    }
-                })
-                .catch(error => {
-                    alert('Submission error. Check connection.');
-                    btn.innerHTML = originalBtnText;
-                    btn.style.opacity = '1';
-                });
-            return false;
-        }
-
-        // Pincode
-        function updateStatusBox(val) {
-            if (!val) {
-                statusBox.className = 'status-box status-ready';
-                statusBox.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Ready to search!';
-            } else if (val.length < 6) {
-                statusBox.className = 'status-box status-warning';
-                statusBox.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Digits remaining: ' + (6 - val.length);
-            } else {
-                statusBox.className = 'status-box status-ready';
-                statusBox.innerHTML = '<i class="fa-solid fa-check"></i> Ready to check.';
-            }
-        }
-
-        async function checkPincode() {
-            const input = document.getElementById('pincodeInput');
-            const pincode = input.value.trim();
-
-            if (pincode.length !== 6 || isNaN(pincode)) {
-                statusBox.className = 'status-box status-error';
-                statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid Pincode';
-                return;
-            }
-
-            statusBox.className = 'status-box status-ready';
-            statusBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
-
-            await new Promise(r => setTimeout(r, 1000));
-
-            if (pincode.startsWith('11')) {
-                statusBox.className = 'status-box status-success';
-                statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Available!</h4><p>We serve Delhi/New Delhi/Rohini</p></div>';
-            } else {
-                statusBox.className = 'status-box status-error';
-                statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Not Available in this area.';
-            }
-        }
-
-        document.getElementById('pincodeInput').addEventListener('keypress', e => {
-            if (e.key === 'Enter') checkPincode();
-        });
-
         // 3D TILT EFFECT (Re-added)
         document.querySelectorAll('.stat-card, .service-card, .pincode-card, .img-wrapper').forEach(card => {
             card.addEventListener('mousemove', function (e) {
@@ -1909,74 +1307,6 @@
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
             });
         });
-
-        // Journey Steps Logic
-        const journeyData = [
-            {
-                id: 1,
-                title: "Discovery & Site Visit",
-                desc: "We understand your vision, constraints and walk through the space together.",
-                img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-                tags: ["Progress photos", "Quality checks", "Project manager"]
-            },
-            {
-                id: 2,
-                title: "Design & Planning",
-                desc: "Concepts, layouts and material recommendations tailored to your budget.",
-                img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80",
-                tags: ["3D Visualization", "Material Selection", "Budget Planning"]
-            },
-            {
-                id: 3,
-                title: "Execution",
-                desc: "Our vetted professionals execute the plan with regular updates and check-ins.",
-                img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80",
-                tags: ["Vetted Pros", "Milestone Tracking", "Site Supervision"]
-            },
-            {
-                id: 4,
-                title: "Handover & Aftercare",
-                desc: "Walkthrough, quality checks and support even after the project is done.",
-                img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
-                tags: ["Final Inspection", "Warranty Support", "Maintenance Guide"]
-            }
-        ];
-
-        function setJourneyStep(stepId) {
-            // Update Active Card
-            document.querySelectorAll('.journey-step-card').forEach(card => card.classList.remove('active'));
-            document.querySelectorAll('.journey-step-card')[stepId - 1].classList.add('active');
-
-            // Update Content with Fade Animation
-            const img = document.getElementById('journeyImg');
-            const title = document.getElementById('journeyTitle');
-            const desc = document.getElementById('journeyDesc');
-            const badge = document.getElementById('journeyStepBadge');
-            const tagsParams = document.getElementById('journeyTags');
-
-            const data = journeyData[stepId - 1];
-
-            // Animate Out
-            title.style.opacity = 0;
-            desc.style.opacity = 0;
-            img.style.opacity = 0.5;
-
-            setTimeout(() => {
-                // Update Data
-                badge.innerText = stepId === 4 ? 'FINAL' : `STEP ${stepId}`;
-                title.innerText = data.title;
-                desc.innerText = data.desc;
-                img.src = data.img;
-
-                // Update Tags
-                tagsParams.innerHTML = data.tags.map(tag => `<span class="step-tag">${tag}</span>`).join('');
-
-                // Animate In
-                title.style.opacity = 1;
-                desc.style.opacity = 1;
-                img.style.opacity = 1;
-            }, 200);
-        }
     </script>
     <!-- Service Modal (Updated for Phone) -->
     <div id="serviceModal" class="service-modal">
