@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skital - Expert Terrace Services</title>
+    <title>Build & Fix - Expert Terrace Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
@@ -316,129 +316,6 @@
             font-weight: 600;
             font-size: 1.1rem;
             color: var(--text-gray);
-        }
-
-        /* PINCODE */
-        .pincode-card {
-            background: var(--surface-color);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 60px 40px;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-            border: var(--glass-border);
-            transition: var(--transition);
-        }
-
-        .pincode-card:hover {
-            border-color: rgba(6, 182, 212, 0.5);
-            box-shadow: 0 25px 60px -12px rgba(6, 182, 212, 0.2);
-        }
-
-        .pin-icon-top {
-            width: 70px;
-            height: 70px;
-            background: var(--primary-gradient);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 1.8rem;
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
-        }
-
-        .pincode-input {
-            width: 100%;
-            padding: 20px 25px 20px 55px;
-            font-size: 1.1rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            background: white;
-            color: var(--text-dark);
-            font-family: var(--font-main);
-            transition: var(--transition);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .pincode-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-        }
-
-        .input-wrapper {
-            position: relative;
-            flex: 1;
-        }
-
-        .search-icon-input {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #94a3b8;
-        }
-
-        .go-btn {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 0 40px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .go-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
-        }
-
-        .search-container {
-            display: flex;
-            gap: 15px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .status-box {
-            margin-top: 30px;
-            padding: 20px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            font-weight: 500;
-        }
-
-        .status-ready {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            color: #60a5fa;
-        }
-
-        .status-success {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            color: #34d399;
-            text-align: left;
-        }
-
-        .status-error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #f87171;
         }
 
         /* SERVICES */
@@ -1111,7 +988,7 @@
                 color: var(--primary-color);
             }
 
-            /* Check Availability Optimization */
+
             .availability-section .pin-icon-top,
             .availability-section h2,
             .availability-section p {
@@ -1869,48 +1746,6 @@
             return false;
         }
 
-        // Pincode
-        function updateStatusBox(val) {
-            if (!val) {
-                statusBox.className = 'status-box status-ready';
-                statusBox.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Ready to search!';
-            } else if (val.length < 6) {
-                statusBox.className = 'status-box status-warning';
-                statusBox.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Digits remaining: ' + (6 - val.length);
-            } else {
-                statusBox.className = 'status-box status-ready';
-                statusBox.innerHTML = '<i class="fa-solid fa-check"></i> Ready to check.';
-            }
-        }
-
-        async function checkPincode() {
-            const input = document.getElementById('pincodeInput');
-            const pincode = input.value.trim();
-
-            if (pincode.length !== 6 || isNaN(pincode)) {
-                statusBox.className = 'status-box status-error';
-                statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid Pincode';
-                return;
-            }
-
-            statusBox.className = 'status-box status-ready';
-            statusBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
-
-            await new Promise(r => setTimeout(r, 1000));
-
-            if (pincode.startsWith('11')) {
-                statusBox.className = 'status-box status-success';
-                statusBox.innerHTML = '<i class="fa-regular fa-circle-check"></i><div><h4>Available!</h4><p>We serve Delhi/New Delhi/Rohini</p></div>';
-            } else {
-                statusBox.className = 'status-box status-error';
-                statusBox.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Not Available in this area.';
-            }
-        }
-
-        document.getElementById('pincodeInput').addEventListener('keypress', e => {
-            if (e.key === 'Enter') checkPincode();
-        });
-
         // 3D TILT EFFECT (Re-added)
         document.querySelectorAll('.stat-card, .service-card, .pincode-card, .img-wrapper').forEach(card => {
             card.addEventListener('mousemove', function (e) {
@@ -2055,3 +1890,4 @@
 </body>
 
 </html>
+
