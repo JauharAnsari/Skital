@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Build N Fix - Premium Construction & Design</title>
+    <title>Build & Fix - Premium Construction & Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
@@ -317,6 +317,24 @@
             color: var(--text-gray);
         }
 
+        /* Rating card specific */
+        .rating-stars {
+            font-size: 1.8rem;
+            color: #22d3ee;
+            letter-spacing: 3px;
+            line-height: 1.2;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .rating-value {
+            font-size: 2.6rem !important;
+            font-weight: 800 !important;
+            color: var(--text-dark) !important;
+            margin: 4px 0 6px !important;
+            display: block !important;
+        }
+
 
 
         /* SERVICES */
@@ -626,6 +644,111 @@
             }
         }
 
+        /* ===== DESKTOP COMPACT VIEW — Services visible above fold ===== */
+        @media (min-width: 901px) {
+            header {
+                padding: 12px 0;
+            }
+
+            .hero-section {
+                min-height: 32vh;
+                padding: 10px 20px 0;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+                margin-bottom: 12px;
+                letter-spacing: -1px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 18px;
+            }
+
+            .primary-btn,
+            .secondary-btn {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+            }
+
+            /* All sections get tighter padding on desktop */
+            .section {
+                padding: 22px 0;
+            }
+
+            .stats-section {
+                padding-top: 18px !important;
+                padding-bottom: 12px !important;
+            }
+
+            .stat-card {
+                padding: 22px 20px;
+                border-radius: 18px;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+                margin: 8px 0;
+            }
+
+            .rating-stars {
+                font-size: 1.4rem;
+                letter-spacing: 2px;
+            }
+
+            .rating-value {
+                font-size: 2rem !important;
+                margin: 4px 0 6px !important;
+            }
+
+            .icon-box {
+                width: 52px;
+                height: 52px;
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+                border-radius: 14px;
+            }
+
+            .services-section {
+                padding-top: 10px !important;
+                padding-bottom: 18px !important;
+            }
+
+            .services-section h2,
+            .form-header h2 {
+                font-size: 2rem !important;
+                margin-bottom: 6px !important;
+            }
+
+            .service-sub {
+                margin-bottom: 22px !important;
+                font-size: 0.95rem;
+            }
+
+            .services-grid {
+                gap: 14px;
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+
+            .service-card {
+                padding: 22px 15px;
+                border-radius: 18px;
+            }
+
+            .service-icon-circle {
+                width: 52px;
+                height: 52px;
+                font-size: 1.4rem;
+                margin-bottom: 12px;
+            }
+
+            .service-text {
+                font-size: 0.95rem;
+            }
+        }
+        /* ===== END DESKTOP COMPACT VIEW ===== */
+
         /* CONTACT FORM */
         .contact-form-container {
             background: var(--surface-color);
@@ -903,10 +1026,19 @@
 
 
 
-            /* Fix Rating Stars Mobile */
-            /* Fix Rating Stars Mobile */
+            /* Fix Rating Card Mobile */
             .stat-card .stat-value span {
-                display: none !important;
+                display: inline !important;
+            }
+
+            .rating-stars {
+                font-size: 1rem !important;
+                letter-spacing: 1px !important;
+            }
+
+            .rating-value {
+                font-size: 0.95rem !important;
+                margin: 1px 0 2px !important;
             }
 
             .service-card {
@@ -1359,7 +1491,7 @@
 
     <header>
         <div class="container header-content">
-            <div class="brand-name">Build n Fix</div>
+            <div class="brand-name">Build & Fix</div>
             <a href="#contact" class="nav-btn" onclick="handleContactClick(event)">Contact</a>
         </div>
     </header>
@@ -1390,9 +1522,8 @@
             <div class="stat-card">
                 <div class="icon-box"><i class="fa-solid fa-medal"></i></div>
                 <div class="stat-info">
-                    <div class="stat-value" style="display: flex; gap: 5px; align-items: center;">
-                        <span style="color: #22d3ee; font-size: 1.2rem;">★★★★★</span>(4.3)
-                    </div>
+                    <div class="rating-stars">★★★★★</div>
+                    <div class="stat-value rating-value">(4.3)</div>
                     <div class="stat-label">Trusted Score</div>
                     <div class="stat-sub">Based on 1,234 reviews</div>
                 </div>
@@ -1828,7 +1959,7 @@
 
             <form id="contactForm" action="https://formsubmit.co/ja54321anderson@gmail.com" method="POST"
                 onsubmit="handleFormSubmit(event)">
-                <input type="hidden" name="_subject" value="New Inquiry from Build n Fix Website">
+                <input type="hidden" name="_subject" value="New Inquiry from Build & Fix Website">
                 <input type="hidden" name="_captcha" value="false">
 
                 <div class="form-group">
@@ -1894,7 +2025,7 @@
                         <i class="fa-solid fa-phone input-icon" style="top: 43px;"></i>
                         <input type="tel" name="phone" class="form-control" placeholder="10-digit Mobile Number"
                             pattern="[0-9]{10}" title="Please enter a valid 10-digit number">
-                    </div>
+                        </div>
 
                     <div class="form-group">
                         <label class="form-label">Message (Optional)</label>
